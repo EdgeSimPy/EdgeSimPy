@@ -1,0 +1,64 @@
+# Project information
+site_name: EdgeSimPy
+site_description: "Python-based modeling and simulation framework for Edge Computing resource management policies"
+site_author: "Paulo Severo"
+site_url: "https://edgesimpy.github.io"
+
+# Repository
+repo_name: "EdgeSimPy/EdgeSimPy"
+repo_url: "https://github.com/EdgeSimPy/EdgeSimPy"
+edit_uri: "https://github.com/EdgeSimPy/EdgeSimPy/tree/master/docs"
+
+# Navigation
+nav:
+- Homepage: "index.md"
+- Documentation: "documentation.md"
+- EdgeSimPy:
+  - Core:
+    - "Component Manager": "EdgeSimPy/core/component_manager.md"
+    - "Simulator": "EdgeSimPy/core/simulator.md"
+  - Components:
+    - "Base Station": "EdgeSimPy/components/base_station.md"
+    - "Topology": "EdgeSimPy/components/topology.md"
+    - "Network Switch": "EdgeSimPy/components/network_switch.md"
+    - "Network Link": "EdgeSimPy/components/network_link.md"
+    - "Edge Server": "EdgeSimPy/components/edge_server.md"
+    - "User": "EdgeSimPy/components/user.md"
+    - "Application": "EdgeSimPy/components/application.md"
+    - "Service": "EdgeSimPy/components/service.md"
+    - "Container Image": "EdgeSimPy/components/container_image.md"
+    - "Container Layer": "EdgeSimPy/components/container_layer.md"
+    - "Container Registry": "EdgeSimPy/components/container_registry.md"
+    - "Network Flow": "EdgeSimPy/components/network_flow.md"
+    - Flow Scheduling:
+      - "Equal Share": "EdgeSimPy/components/flow_scheduling/equal_share.md"
+      - "Max-Min Fairness": "EdgeSimPy/components/flow_scheduling/max_min_fairness.md"
+    - User Access Patterns:
+      - "Circular": "EdgeSimPy/components/user_access_patterns/circular.md"
+      - "Random": "EdgeSimPy/components/user_access_patterns/random.md"
+    - User Mobility Models:
+      - "Pathway": "EdgeSimPy/components/mobility_models/pathway.md"
+      - "Random": "EdgeSimPy/components/mobility_models/random.md"
+    - Power Models:
+      - Network:
+        - "Conterato": "EdgeSimPy/components/power_models/network/conterato.md"
+      - Servers:
+        - "Cubic": "EdgeSimPy/components/power_models/servers/cubic.md"
+        - "Linear": "EdgeSimPy/components/power_models/servers/linear.md"
+        - "Square": "EdgeSimPy/components/power_models/servers/square.md"
+
+# Configuration
+theme:
+  name: material
+  language: "en"
+  custom_dir: docs/overrides
+  primary: "grey"
+  palette:
+    primary: "grey"
+
+# Customization
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - mkdocstrings
