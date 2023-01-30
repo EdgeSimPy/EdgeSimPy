@@ -17,7 +17,10 @@ def pathway(user: object):
         user (object): User whose mobility will be defined.
     """
     # Defining the mobility model parameters based on the user's 'user.mobility_model_parameters' attribute
-    parameters = user.mobility_model_parameters
+    if hasattr(user, "mobility_model_parameters"):
+        parameters = user.mobility_model_parameters
+    else:
+        parameters = {}
 
     # Number of "mobility routines" added each time the method is called. Defaults to 5.
     n_paths = parameters["n_paths"] if "n_paths" in parameters else 5
