@@ -130,3 +130,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Python's dev tests using __main__.py
+edge_sim_py/__main__.py
