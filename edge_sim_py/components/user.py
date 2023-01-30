@@ -54,6 +54,7 @@ class User(ComponentManager, Agent):
 
         # User mobility model
         self.mobility_model = None
+        self.mobility_model_parameters = {}
 
         # List of metadata from applications accessed by the user
         self.communication_paths = {}
@@ -83,6 +84,7 @@ class User(ComponentManager, Agent):
                 "delay_slas": copy.deepcopy(self.delay_slas),
                 "communication_paths": copy.deepcopy(self.communication_paths),
                 "making_requests": copy.deepcopy(self.making_requests),
+                "mobility_model_parameters": copy.deepcopy(self.mobility_model_parameters),
             },
             "relationships": {
                 "access_patterns": access_patterns,

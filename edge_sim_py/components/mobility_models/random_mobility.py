@@ -6,13 +6,15 @@ from edge_sim_py.components.base_station import BaseStation
 import random
 
 
-def random_mobility(user: object, parameters: dict = {}):
+def random_mobility(user: object):
     """Creates a random mobility path for an user.
 
     Args:
         user (object): User whose mobility will be defined.
-        parameters (dict, optional): Parameters for the pathway mobility model. Defaults to {}.
     """
+    # Defining the mobility model parameters based on the user's 'user.mobility_model_parameters' attribute
+    parameters = user.mobility_model_parameters
+
     # Gathering the network topology object
     topology = user.model.topology
 

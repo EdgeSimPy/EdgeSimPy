@@ -10,13 +10,15 @@ import random
 import networkx as nx
 
 
-def pathway(user: object, parameters: dict = {}):
+def pathway(user: object):
     """Creates a mobility path for an user based on the Pathway mobility model.
 
     Args:
         user (object): User whose mobility will be defined.
-        parameters (dict, optional): Parameters for the pathway mobility model. Defaults to {}.
     """
+    # Defining the mobility model parameters based on the user's 'user.mobility_model_parameters' attribute
+    parameters = user.mobility_model_parameters
+
     # Number of "mobility routines" added each time the method is called. Defaults to 5.
     n_paths = parameters["n_paths"] if "n_paths" in parameters else 5
 
