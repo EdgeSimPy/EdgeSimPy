@@ -73,7 +73,7 @@ class Service(ComponentManager, Agent):
         self.users = []
 
         # Service availability and provisioning status
-        self._available = True  # Service is not available, for example, when its state is being transferred
+        self._available = False  # Service is not available, for example, when its state is being transferred
         self.being_provisioned = False
 
         # List that stores metadata about each migration experienced by the service throughout the simulation
