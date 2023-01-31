@@ -16,7 +16,7 @@ def pathway(user: object):
     Args:
         user (object): User whose mobility will be defined.
     """
-    # Defining the mobility model parameters based on the user's 'user.mobility_model_parameters' attribute
+    # Defining the mobility model parameters based on the user's 'mobility_model_parameters' attribute
     if hasattr(user, "mobility_model_parameters"):
         parameters = user.mobility_model_parameters
     else:

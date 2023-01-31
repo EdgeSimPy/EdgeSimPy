@@ -12,8 +12,11 @@ def random_mobility(user: object):
     Args:
         user (object): User whose mobility will be defined.
     """
-    # Defining the mobility model parameters based on the user's 'user.mobility_model_parameters' attribute
-    parameters = user.mobility_model_parameters
+    # Defining the mobility model parameters based on the user's 'mobility_model_parameters' attribute
+    if hasattr(user, "mobility_model_parameters"):
+        parameters = user.mobility_model_parameters
+    else:
+        parameters = {}
 
     # Gathering the network topology object
     topology = user.model.topology
