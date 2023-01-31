@@ -10,18 +10,20 @@ import random
 import networkx as nx
 
 
-def pathway(user: object, parameters: dict = {}):
+def pathway(user: object):
     """Creates a mobility path for an user based on the Pathway mobility model.
 
     Args:
         user (object): User whose mobility will be defined.
-        parameters (dict, optional): Parameters for the pathway mobility model. Defaults to {}.
     """
-    # Number of "mobility routines" added each time the method is called. Defaults to 5.
-    n_paths = parameters["n_paths"] if "n_paths" in parameters else 5
+    # Defining the mobility model parameters based on the user's 'mobility_model_parameters' attribute
+    if hasattr(user, "mobility_model_parameters"):
+        parameters = user.mobility_model_parameters
+    else:
+        parameters = {}
 
-    # Probability of moving the user to a different location. Gets values between 0 and 1 (i.e., 0 means 0%, 1 means 100%, etc.)
-    mobility_probability = parameters["mobility_probability"] if "mobility_probability" in parameters else 1
+    # Number of "mobility routines" added each time the method is called. Defaults to 1.
+    n_paths = parameters["n_paths"] if "n_paths" in parameters else 1
 
     # Gathering the BaseStation located in the current client's location
     current_node = BaseStation.find_by(attribute_name="coordinates", attribute_value=user.coordinates)
@@ -29,27 +31,21 @@ def pathway(user: object, parameters: dict = {}):
     # Defining the user's mobility path
     mobility_path = []
 
-    # Defining randomly if the user will move or stay in his current position
-    if random.random() < mobility_probability:
-        for i in range(n_paths):
-            # Defining a target location and gathering the BaseStation located in that location
-            target_node = random.choice([bs for bs in BaseStation.all() if bs != current_node])
+    for i in range(n_paths):
+        # Defining a target location and gathering the BaseStation located in that location
+        target_node = random.choice([bs for bs in BaseStation.all() if bs != current_node])
 
-            # Calculating the shortest mobility path according to the Pathway mobility model
-            path = nx.shortest_path(G=user.model.topology, source=current_node.network_switch, target=target_node.network_switch)
-            mobility_path.extend([network_switch.base_station for network_switch in path])
+        # Calculating the shortest mobility path according to the Pathway mobility model
+        path = nx.shortest_path(G=user.model.topology, source=current_node.network_switch, target=target_node.network_switch)
+        mobility_path.extend([network_switch.base_station for network_switch in path])
 
-            # Removing repeated entries
-            if i < n_paths - 1:
-                current_node = mobility_path.pop(-1)
+        if i < n_paths - 1:
+            current_node = mobility_path.pop(-1)
 
         # Removing repeated entries
-        user_base_station = BaseStation.find_by(attribute_name="coordinates", attribute_value=user.coordinates_trace[-1])
+        user_base_station = BaseStation.find_by(attribute_name="coordinates", attribute_value=user.coordinates)
         if user_base_station == mobility_path[0]:
             mobility_path.pop(0)
-
-    else:
-        mobility_path.extend([current_node for _ in range(n_paths)])
 
     # We assume that users do not necessarily move from one step to another, as one step may represent a very small time interval
     # (e.g., 1 millisecond). Therefore, each position on the mobility path is repeated N times, so that user takes a predefined

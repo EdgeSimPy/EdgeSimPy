@@ -6,6 +6,7 @@ Example:
     'Service.find_by_id(3)' allows you to find the Service object that has id attribute = 3
 """
 # Python libraries
+import os
 import json
 
 
@@ -46,6 +47,10 @@ class ComponentManager:
             scenario (dict): Python dictionary representing the simulation model.
         """
         scenario = {}
+
+        # Creating the "datasets" directory if it doesn't exists
+        if not os.path.exists("datasets/"):
+            os.makedirs("datasets")
 
         for component in ComponentManager.__subclasses__():
             if component.__name__ not in ignore_list:

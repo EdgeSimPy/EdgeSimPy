@@ -130,3 +130,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# EdgeSimPy's developer tests
+edge_sim_py/__main__.py
+datasets/
+logs/

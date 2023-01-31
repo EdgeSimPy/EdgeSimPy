@@ -54,6 +54,7 @@ class User(ComponentManager, Agent):
 
         # User mobility model
         self.mobility_model = None
+        self.mobility_model_parameters = {}
 
         # List of metadata from applications accessed by the user
         self.communication_paths = {}
@@ -83,6 +84,9 @@ class User(ComponentManager, Agent):
                 "delay_slas": copy.deepcopy(self.delay_slas),
                 "communication_paths": copy.deepcopy(self.communication_paths),
                 "making_requests": copy.deepcopy(self.making_requests),
+                "mobility_model_parameters": copy.deepcopy(self.mobility_model_parameters)
+                if self.mobility_model_parameters
+                else {},
             },
             "relationships": {
                 "access_patterns": access_patterns,
@@ -271,19 +275,19 @@ class User(ComponentManager, Agent):
         self.delay_slas[str(app.id)] = delay_sla
         self.delays[str(app.id)] = None
 
-    def _set_initial_position(self, coordinates: list, number_of_replicates: bool = 0) -> object:
+    def _set_initial_position(self, coordinates: list, number_of_replicates: int = 0) -> object:
         """Defines the initial coordinates for the user, automatically connecting to a base station in that position.
 
         Args:
             coordinates (list): Initial user coordinates.
-            number_of_replicates (bool, optional): Number of times the initial coordinates will replicated in the coordinates trace. Defaults to 0.
+            number_of_replicates (int, optional): Number of times the initial coordinates will replicated in the coordinates trace. Defaults to 0.
 
         Returns:
             self (object): Updated user object.
         """
         # Defining the "coordinates" and "coordinates_trace" attributes
         self.coordinates = coordinates
-        self.coordinates_trace = [coordinates for _ in range(number_of_replicates + 1)]
+        self.coordinates_trace = [coordinates for _ in range(number_of_replicates - 1)]
 
         # Connecting the user to the base station that shares his initial position
         base_station = BaseStation.find_by(attribute_name="coordinates", attribute_value=self.coordinates)
