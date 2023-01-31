@@ -1,5 +1,5 @@
 """Automatic Python configuration file."""
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # Server power models
 from .linear_server_power_model import LinearServerPowerModel
