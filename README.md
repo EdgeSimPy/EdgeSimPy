@@ -1,26 +1,24 @@
 <p align="center">
-    <img src="./assets/edgesimpy-icon.jpg" alt="EdgeSimPy Logo" width="150" height="150" />
+    <img src="/docs/assets/edgesimpy-icon.jpg" alt="EdgeSimPy Logo" width="150" height="150" />
     <h3 align="center">EdgeSimPy</h3>
     <p align="center">🚀 The Next-Generation Edge Computing Simulation Toolkit 🚀</p>
     <p align="center"><a href="https://edgesimpy.github.io/" target="_blank">Website</a> &#183;
     <a href="https://edgesimpy.github.io/documentation/" target="_blank">Documentation</a> &#183;
     <a href="https://www.github.com/edgesimpy/edgesimpy-tutorials" target="_blank">Tutorials</a> &#183;
-    <a href="/assets/EdgeSimPy-Paper-FGCS.pdf" target="_blank">Paper</a></p>
+    <a href="/docs/assets/EdgeSimPy-Paper-FGCS.pdf" target="_blank">Paper</a></p>
 </p>
 
 
 ---
 
-EdgeSimPy is a Python-based Edge Computing simulator with easy-to-grasp abstractions for edge servers, network devices, and applications, and built-in models for user mobility, application composition, and power consumption.
+EdgeSimPy is a Python-based Edge Computing simulator with easy-to-grasp abstractions for edge servers, network devices, and applications, and built-in models for user mobility, application composition, and power consumption. An overview of EdgeSimPy use cases is shown in the figure below.
 
-An overview of EdgeSimPy use cases is shown in the figure below.
-
-<img src="./assets/edgesimpy-features.jpg" alt="EdgeSimPy Use Cases" width="60%" />
+<img src="/docs/assets/edgesimpy-features.jpg" alt="EdgeSimPy Use Cases" width="60%" />
 
 
 EdgeSimPy was designed to streamline the prototyping of resource management policies through realistic simulations. To do this, EdgeSimPy provides a set of unique functional abstractions (e.g., container registries, images, and layers) that replicate the application provisioning method of widely used platforms such as [Docker](https://www.docker.com/), allowing seamless integration with repositories like [DockerHub](https://hub.docker.com/).
 
-**The EdgeSimPy paper is published in the Future Generation Computer Systems journal ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](/assets/EdgeSimPy-Paper-FGCS.pdf)). If you use EdgeSimPy in an academic work, we would appreciate citations according to the following reference:**
+**The EdgeSimPy paper is published in the Future Generation Computer Systems journal ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](/docs/assets/EdgeSimPy-Paper-FGCS.pdf)). If you use EdgeSimPy in an academic work, we would appreciate citations according to the following reference:**
 
 ```bibtex
 @article{souza2023edgesimpy,
@@ -35,7 +33,7 @@ EdgeSimPy was designed to streamline the prototyping of resource management poli
 
 # Overview
 
-This section describes EdgeSimPy's architecture and main components. You can also learn more details about EdgeSimPy by reading our research paper ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](/assets/EdgeSimPy-Paper-FGCS.pdf)).
+This section describes EdgeSimPy's architecture and main components. You can also learn more details about EdgeSimPy by reading our research paper ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](/docs/assets/EdgeSimPy-Paper-FGCS.pdf)).
 
 ## Input Files
 
@@ -45,7 +43,7 @@ Attributes refer to the internal characteristics of entities, such as edge serve
 
 By adhering to this predefined structure, EdgeSimPy can automatically identify entity input metadata and construct the simulated scenario, even in cases where custom attributes and relationships have been specified. A sample dataset file following EdgeSimPy's input format is shown below.
 
-<img src="./assets/edgesimpy-input-format.jpg" alt="EdgeSimPy Input Format" width="50%" />
+<img src="/docs/assets/edgesimpy-input-format.jpg" alt="EdgeSimPy Input Format" width="50%" />
 
 
 
@@ -57,7 +55,7 @@ Once the simulation starts, EdgeSimPy monitor the entity's state at the end of e
 
 EdgeSimPy's flexibility stems from a modular architecture, where each entity is self-contained to streamline the integration of new features and algorithms. An overview of EdgeSimPy's architecture is presented in the figure below.
 
-<img src="./assets/edgesimpy-architecture.jpg" alt="EdgeSimPy Architecture" width="60%" />
+<img src="/docs/assets/edgesimpy-architecture.jpg" alt="EdgeSimPy Architecture" width="60%" />
 
 EdgeSimPy's functional abstractions are grouped into four layers:
 
