@@ -1,0 +1,147 @@
+header {
+    background: linear-gradient(rgb(26, 32, 44), rgb(58, 70, 89));
+    color: white;
+    padding-bottom: 4rem;
+}
+header #edgesimpy-tag {
+    background-color: #38B2AC;
+    padding: 4px 8px 6px 6px;
+    border-radius: 4px;
+    color: #E6FFFA;
+}
+header h1 {
+    font-weight: 900;
+    font-size: 2rem;
+}
+header h2 {
+    font-weight: 900;
+    font-size: 3.2rem;
+}
+header p {
+    font-size: 1.6rem;
+}
+
+
+#users {
+    background-color: #e4e9f2;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+#users h1 {
+    font-weight: 900;
+    font-size: 1.7rem;
+}
+#users img {
+    height: 50px;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+#users img:hover {
+    filter: grayscale(0%);
+}
+
+
+#example {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+#example h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+#example h2 {
+    font-weight: 900;
+    font-size: 2.7rem;
+}
+
+
+#showcase {
+    background: linear-gradient(white, rgb(209, 244, 237));
+    color: rgb(26, 32, 44);
+    padding-bottom: 4rem;
+}
+#features {
+    padding: 35px 10px 15px 0px;
+    background-color: white;
+    color: #0F0F0F;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    -webkit-box-shadow: 10px 10px 51px -23px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 51px -23px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 51px -23px rgba(0,0,0,0.75);
+}
+#features p {
+    font-size: 1.3rem;
+}
+
+
+#examples_library {
+    color:rgb(26, 32, 44);
+    padding-top: 5rem;
+}
+#examples_library h1 {
+    font-weight: 900;
+    font-size: 3rem;
+}
+#examples_library a {
+    color: #38B2AC;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+#paper {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+#paper h1 {
+    font-weight: 900;
+    font-size: 3rem;
+}
+#paper p {
+    font-size: 1.5rem;
+}
+#paper h5 {
+    font-size: 2rem;
+    font-weight: 900;
+}
+#bib-reference {
+    text-align: left;
+    background-color: #272822;
+    color: white;
+    border-radius: 10px;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+    -webkit-box-shadow: 10px 10px 51px -23px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 51px -23px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 51px -23px rgba(0,0,0,0.75);
+}
+#bib-reference #bib-entry-type {
+    color: #f2273c;
+}
+#bib-reference #bib-entry-name {
+    color: #a6e22d;
+}
+#bib-reference .bib-entry-field {
+    color: #66d9d4;
+}
+
+
+footer {
+    background: linear-gradient(rgb(26, 32, 44), rgb(58, 70, 89));
+    color: white;
+    padding-top: 1.5rem;
+    padding-bottom: 0.8rem;
+}
+footer h1 {
+    font-weight: 900;
+    font-size: 2.5rem;
+}
+footer h2 {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
