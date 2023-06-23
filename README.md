@@ -37,7 +37,7 @@ EdgeSimPy was designed to streamline the prototyping of resource management poli
 
 # Overview
 
-This section describes EdgeSimPy's architecture and main components. You can also learn more details about EdgeSimPy by reading our research paper ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](/docs/assets/EdgeSimPy-Paper-FGCS.pdf)).
+This section describes EdgeSimPy's architecture and main components. You can also learn more details about EdgeSimPy by reading our research paper ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](https://raw.githubusercontent.com/EdgeSimPy/edgesimpy/master/docs/assets/EdgeSimPy-Paper-FGCS.pdf)).
 
 ## Input Files
 
