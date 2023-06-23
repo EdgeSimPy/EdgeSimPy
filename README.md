@@ -1,11 +1,11 @@
 <p align="center">
-    <img src="/docs/assets/edgesimpy-icon.jpg" alt="EdgeSimPy Logo" width="150" height="150" />
+    <img src="/docs/assets/edgesimpy-icon.jpg" alt="EdgeSimPy Logo" width="200" height="200" />
     <h3 align="center">EdgeSimPy</h3>
     <p align="center">🚀 The Next-Generation Edge Computing Simulation Toolkit 🚀</p>
     <p align="center"><a href="https://edgesimpy.github.io/" target="_blank">Website</a> &#183;
     <a href="https://edgesimpy.github.io/documentation/" target="_blank">Documentation</a> &#183;
     <a href="https://www.github.com/edgesimpy/edgesimpy-tutorials" target="_blank">Tutorials</a> &#183;
-    <a href="/docs/assets/EdgeSimPy-Paper-FGCS.pdf" target="_blank">Paper</a></p>
+    <a href="https://raw.githubusercontent.com/EdgeSimPy/edgesimpy/master/docs/assets/EdgeSimPy-Paper-FGCS.pdf" target="_blank">Paper</a></p>
 </p>
 
 
