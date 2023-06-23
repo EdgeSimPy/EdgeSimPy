@@ -12,75 +12,84 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
         <!-- Boostrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="assets/variables.css">
-        <link rel="stylesheet" href="assets/main.css">
+        <link rel="stylesheet" href="assets/main.css">        
+        <link rel="stylesheet" href="assets/home.css">        
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg" style="background-color: transparent">
+            <nav class="navbar-custom">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="https://edgesimpy.github.io/">EdgeSimPy</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-items" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="https://edgesimpy.github.io/">EdgeSimPy</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="menu-items">
+                        <ul class="nav navbar-nav text-center">
                             <li class="nav-item"><a class="nav-link" href="https://www.github.com/EdgeSimPy/EdgeSimPy" target="_blank">Get EdgeSimPy</a></li>
                             <li class="nav-item"><a class="nav-link" href="/documentation">Documentation</a></li>
-                            <!-- <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Features</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Feature A</a></li>
-                                    <li><a class="dropdown-item" href="#">Feature B</a></li>
-                                    <li><a class="dropdown-item" href="#">Feature C</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">About</a></li> -->
+                            <li class="nav-item"><a class="nav-link" href="#paper-anchor">Research Paper</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://github.com/EdgeSimPy/edgesimpy-tutorials" target="_blank">See Examples</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5 offset-md-1">
-                        <h1><span>EdgeSimPy</span></h1>
+                    <div class="col-xs-12 visible-xs visible-sm text-center">
+                        <h1><span id="edgesimpy-tag">EdgeSimPy</span></h1>
                         <h2>Next Generation<br>Edge Computing<br>Simulation Toolkit</h2>
                         <p>EdgeSimPy helps researchers in prototyping resource management strategies for Edge Computing environments with no burden.</p>
-                        <a href="https://www.github.com/EdgeSimPy/EdgeSimPy"  target="_blank" class="btn btn-lg btn-primary">Get Started <i class="bi bi-arrow-right"></i></a>
-                        <a href="/documentation" class="btn btn-lg btn-secondary">Documentation <i class="bi bi-book"></i></a>
+                        <a href="https://www.github.com/EdgeSimPy/EdgeSimPy"  target="_blank" class="btn btn-sm button-primary">Get Started <i class="glyphicon glyphicon-arrow-right"></i></a>
+                        <a href="/documentation" class="btn btn-sm button-secondary">Documentation <i class="glyphicon glyphicon-book"></i></a>
+                        <a href="https://github.com/EdgeSimPy/edgesimpy-tutorials" target="_blank" class="btn btn-sm button-secondary">Examples <i class="glyphicon glyphicon-thumbs-up"></i></a>
                     </div>
-                    <div class="col-md-6">
-                        <img src="assets/img/example1.svg" alt="" class="img-fluid">
+                    <div class="col-md-5 col-md-offset-1 hidden-xs hidden-sm">
+                        <h1><span id="edgesimpy-tag">EdgeSimPy</span></h1>
+                        <h2>Next Generation<br>Edge Computing<br>Simulation Toolkit</h2>
+                        <p>EdgeSimPy helps researchers in prototyping resource management strategies for Edge Computing environments with no burden.</p>
+                        <a href="https://www.github.com/EdgeSimPy/EdgeSimPy"  target="_blank" class="btn btn-sm button-primary">Get Started <i class="glyphicon glyphicon-arrow-right"></i></a>
+                        <a href="/documentation" class="btn btn-sm button-secondary">Documentation <i class="glyphicon glyphicon-book"></i></a>
+                        <a href="https://github.com/EdgeSimPy/edgesimpy-tutorials" target="_blank" class="btn btn-sm button-secondary">See Examples <i class="glyphicon glyphicon-thumbs-up"></i></a>
+                    </div>
+                    <div class="col-md-6 hidden-xs hidden-sm">
+                        <img src="assets/img/example1.svg" alt="" class="img-responsive">
                     </div>
                 </div>
             </div>
         </header>
+
+
         <section id="users" class="text-center">
             <h1>EdgeSimPy users include:</h1>
             <br>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="container">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-2 offset-md-1">
-                                    <img src="assets/img/pucrs.png" title="Pontifical Catholic University of Rio Grande do Sul" alt="PUCRS Logo" class="img-fluid">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <img src="assets/img/pucrs.png" title="Pontifical Catholic University of Rio Grande do Sul" alt="PUCRS Logo" class="img-responsive">
                                 </div>
-                                <div class="col-md-2">
-                                    <img src="assets/img/iffarroupilha.png" title="Federal Institute Farroupilha" alt="IFFar Logo" class="img-fluid">
+                                <div class="col-xs-2">
+                                    <img src="assets/img/iffarroupilha.png" title="Federal Institute Farroupilha" alt="IFFar Logo" class="img-responsive">
                                 </div>
-                                <div class="col-md-2">
-                                    <img src="assets/img/westernsydneyuniversity.png" title="Western Sydney University" alt="WSU Logo" class="img-fluid">
+                                <div class="col-xs-2">
+                                    <img src="assets/img/westernsydneyuniversity.png" title="Western Sydney University" alt="WSU Logo" class="img-responsive">
                                 </div>
-                                <div class="col-md-2">
-                                    <img src="assets/img/unipampa.png" title="Federal University of Pampa" alt="UNIPAMPA Logo" class="img-fluid">
+                                <div class="col-xs-2">
+                                    <img src="assets/img/unipampa.png" title="Federal University of Pampa" alt="UNIPAMPA Logo" class="img-responsive">
                                 </div>
-                                <div class="col-md-2">
-                                    <img src="assets/img/ufpel.png" title="Federal University of Pelotas" alt="UFPEL Logo" class="img-fluid">
+                                <div class="col-xs-2">
+                                    <img src="assets/img/ufpel.png" title="Federal University of Pelotas" alt="UFPEL Logo" class="img-responsive">
                                 </div>
                             </div>
                         </div>
@@ -88,20 +97,27 @@
                 </div>
             </div>
         </section>
+
+
         <section id="example">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="container">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h1>EdgeSimPy enables</h1>
                                     <h2>Simplified Prototyping</h2>
                                     <p>EdgeSimPy's backend is powered by Object-Oriented Python features, letting you invest more time on prototyping your innovative ideas than fixing bugs and reinventing the wheel.</p>
-                                    <a class="btn btn-lg btn-primary" href="/documentation" target="_blank">Learn more about EdgeSimPy features</a>
+                                    
+                                    <br class="visible-xs visible-sm">
+                                    <img src="assets/img/example2.svg" alt="EdgeSimPy syntax" class="img-responsive visible-xs visible-sm">
+                                    <br class="visible-xs visible-sm">
+
+                                    <a class="btn btn-lg button-primary" href="/documentation" target="_blank">Learn more about EdgeSimPy features</a>
                                 </div>
-                                <div class="col-md-6">
-                                    <img src="assets/img/example2.svg" alt="" class="img-fluid">
+                                <div class="col-md-6 hidden-xs hidden-sm">
+                                    <img src="assets/img/example2.svg" alt="EdgeSimPy syntax" class="img-responsive">
                                 </div>
                             </div>
                         </div>
@@ -109,87 +125,159 @@
                 </div>
             </div>
         </section>
+
+
         <section id="showcase">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-10 offset-md-1">
+                    <div class="col-md-10 col-md-offset-1">
                         <div id="features">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Power consumption models</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Power consumption models</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Multiple network topologies</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Multiple network topologies</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Mobility models</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Mobility models</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Automated dataset generation</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Automated dataset generation</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Multi OS support <small>(Windows, Linux, Mac OS)</small></p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Multi OS support <small>(Windows, Linux, Mac OS)</small></p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Extensible by design</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Extensible by design</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Automated experiments execution</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Automated experiments execution</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Native machine learning support</p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Native machine learning support</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p><i class="bi bi-check2"></i> Several use cases <small>(placement, migration, etc.)</small></p>
+                                        <p><i class="glyphicon glyphicon-ok"></i> Several use cases <small>(placement, migration, etc.)</small></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-9 offset-md-1">
-                            <article id="examples_library">
-                                <h1>Want to See EdgeSimPy in Action?</h1>
-                                <p>We have created a series of hands-on tutorials that leverage EdgeSimPy's functionality on real-life examples that can be easily adapted for your research. The list below contains some featured examples that can be found in EdgeSimPy's <a href="https://www.github.com/edgesimpy/edgesimpy-tutorials" target="_blank">Examples Library</a>.</p>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><i class="bi bi-check2-all"></i> Loading datasets <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/loading-datasets.ipynb" target="_blank">Try Out</a>)</small></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><i class="bi bi-check2-all"></i> Manipulating components <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/manipulating-components.ipynb" target="_blank">Try Out</a>)</small></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><i class="bi bi-check2-all"></i> Creating a placement algorithm <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/creating-placement-algorithm.ipynb" target="_blank">Try Out</a>)</small></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><i class="bi bi-check2-all"></i> Creating a migration algorithm <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/creating-migration-algorithm.ipynb" target="_blank">Try Out</a>)</small></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><i class="bi bi-check2-all"></i> Monitoring custom metrics <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/monitoring-simulation.ipynb" target="_blank">Try Out</a>)</small></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><i class="bi bi-check2-all"></i> Automating experiments <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/automating-experiments.ipynb" target="_blank">Try Out</a>)</small></p>
-                                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <article id="examples_library">
+                            <h1>Want to See EdgeSimPy in Action?</h1>
+                            <p>We have created a series of hands-on tutorials that leverage EdgeSimPy's functionality on real-life examples that can be easily adapted for your research. The list below contains some featured examples that can be found in EdgeSimPy's <a href="https://www.github.com/edgesimpy/edgesimpy-tutorials" target="_blank">Examples Library</a>.</p>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><i class="glyphicon glyphicon-arrow-right"></i> Loading datasets <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/loading-datasets.ipynb" target="_blank">Try Out</a>)</small></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><i class="glyphicon glyphicon-arrow-right"></i> Manipulating components <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/manipulating-components.ipynb" target="_blank">Try Out</a>)</small></p>
                                     </div>
                                 </div>
-                            </article>
-                        </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><i class="glyphicon glyphicon-arrow-right"></i> Creating a placement algorithm <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/creating-placement-algorithm.ipynb" target="_blank">Try Out</a>)</small></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><i class="glyphicon glyphicon-arrow-right"></i> Creating a migration algorithm <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/creating-migration-algorithm.ipynb" target="_blank">Try Out</a>)</small></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><i class="glyphicon glyphicon-arrow-right"></i> Monitoring custom metrics <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/monitoring-simulation.ipynb" target="_blank">Try Out</a>)</small></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><i class="glyphicon glyphicon-arrow-right"></i> Automating experiments <small>(<a href="https://colab.research.google.com/github/edgesimpy/edgesimpy-tutorials/blob/master/notebooks/automating-experiments.ipynb" target="_blank">Try Out</a>)</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="row" id="paper-anchor">
+                    <div class="col-md-10 col-md-offset-1">
+                        <article id="paper" class="visible-xs visible-sm text-center">
+                            <h1>Read our Paper</h1>
+                            <p>Are you looking for more details about EdgeSimPy? Please check out our research paper, published in the Future Generation Computer Systems (FGCS) journal:</p>
+                            <p>
+                                <a href="https://doi.org/10.1016/j.future.2023.06.013" target="_blank" class="btn btn-sm button-secondary">Publication Page</a>
+                                <a href="https://raw.githubusercontent.com/EdgeSimPy/edgesimpy/master/docs/assets/EdgeSimPy-Paper-FGCS.pdf" target="_blank" class="btn btn-sm button-primary">Download PDF (Free)</a>
+                            </p>
+                            <br><br>
+                            <h5>Please cite us according to the following reference:</h5>
+                            <div class="container-fluid">
+                                <div class="row col-md-9">
+                                    <div id="bib-reference">
+                                        <small>
+                                            <span id="bib-entry-type">@article</span>{<span id="bib-entry-name">souza2023edgesimpy</span>, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">author</span>={Paulo S. Souza and Tiago Ferreto and Rodrigo N. Calheiros}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">title</span>={EdgeSimPy: Python-Based Modeling and Simulation of Edge Computing Resource Management Policies}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">journal</span>={Future Generation Computer Systems}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">year</span>={2023}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">issn</span>={0167-739X}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">volume</span>={TBD}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">pages</span>={TBD}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">doi</span>={https://doi.org/10.1016/j.future.2023.06.013}, <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">publisher</span>={Elsevier} <br>
+                                            }
+                                        </small>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article id="paper" class="hidden-xs hidden-sm">
+                            <h1>Read our Paper</h1>
+                            <p>Are you looking for more details about EdgeSimPy? Please check out our research paper, published in the Future Generation Computer Systems (FGCS) journal:</p>
+                            <p>
+                                <a href="https://doi.org/10.1016/j.future.2023.06.013" target="_blank" class="btn btn-md button-secondary">Access the Paper in the Journal's Page</a>
+                                <a href="https://raw.githubusercontent.com/EdgeSimPy/edgesimpy/master/docs/assets/EdgeSimPy-Paper-FGCS.pdf" target="_blank" class="btn btn-md button-primary">Download EdgeSimPy Paper (Free)</a>
+                            </p>
+                            <br><br>
+                            <h5>Please cite us according to the following reference:</h5>
+                            <div class="container-fluid">
+                                <div class="row col-md-9">
+                                    <div id="bib-reference">
+                                        <span id="bib-entry-type">@article</span>{<span id="bib-entry-name">souza2023edgesimpy</span>, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">author</span>={Paulo S. Souza and Tiago Ferreto and Rodrigo N. Calheiros}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">title</span>={EdgeSimPy: Python-Based Modeling and Simulation of Edge Computing Resource Management Policies}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">journal</span>={Future Generation Computer Systems}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">year</span>={2023}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">issn</span>={0167-739X}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">volume</span>={TBD}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">pages</span>={TBD}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">doi</span>={https://doi.org/10.1016/j.future.2023.06.013}, <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="bib-entry-field">publisher</span>={Elsevier} <br>
+                                        }
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
         </section>
+
+
         <footer class="text-center">
             <h1>EdgeSimPy</h1>
-            <h2>Website made with <i class="bi bi-heart-fill"></i> using MkDocs</h2>
+            <h2>Website made with <i class="glyphicon glyphicon-heart"></i> using MkDocs</h2>
         </footer>
 
+
         <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     </body>
 </html>
