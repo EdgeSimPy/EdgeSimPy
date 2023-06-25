@@ -18,22 +18,6 @@ EdgeSimPy is a Python-based Edge Computing simulator with easy-to-grasp abstract
 
 EdgeSimPy was designed to streamline the prototyping of resource management policies through realistic simulations. To do this, EdgeSimPy provides a set of unique functional abstractions (e.g., container registries, images, and layers) that replicate the application provisioning method of widely used platforms such as [Docker](https://www.docker.com/), allowing seamless integration with repositories like [DockerHub](https://hub.docker.com/).
 
-**The EdgeSimPy paper is published in the Future Generation Computer Systems journal ([link here](https://doi.org/10.1016/j.future.2023.06.013), [PDF here](https://raw.githubusercontent.com/EdgeSimPy/edgesimpy/master/docs/assets/EdgeSimPy-Paper-FGCS.pdf)). If you use EdgeSimPy in an academic work, we would appreciate citations according to the following reference:**
-
-```bibtex
-@article{souza2023edgesimpy,
-    author={Paulo S. Souza and Tiago Ferreto and Rodrigo N. Calheiros},
-    title={EdgeSimPy: Python-Based Modeling and Simulation of Edge Computing Resource Management Policies},
-    journal={Future Generation Computer Systems},
-    year={2023},
-    issn={0167-739X},
-    volume={TBD},
-    pages={TBD},
-    doi={https://doi.org/10.1016/j.future.2023.06.013},
-    publisher={Elsevier}
-}
-```
-
 
 # Overview
 
@@ -186,23 +170,29 @@ for service in Service.all():
 
 
 
-# Who's using EdgeSimPy
+# Check Out EdgeSimPy's Paper
 
-> **:tada:Are you using EdgeSimPy in your work?:tada:**
->
-> Open a new issue with your paper’s reference (preferentially in APA format), so we can include it in the list below.
+> **:tada: We are glad to inform that EdgeSimPy's paper has been published in the Future Generation Computer Systems journal :tada:**
 
+- **Access the paper in the journal's page:** [https://doi.org/10.1016/j.future.2023.06.013](https://doi.org/10.1016/j.future.2023.06.013)
+- **Download the paper with no charges:** [PDF here](https://raw.githubusercontent.com/EdgeSimPy/edgesimpy/master/docs/assets/EdgeSimPy-Paper-FGCS.pdf)
 
+**If you use EdgeSimPy in an academic work, we would appreciate citations according to the following reference:**
 
-* Souza, P. S., Ferreto, T. C., Rossi, F. D., & Calheiros, R. N. (2022). Location-Aware Maintenance Strategies for Edge Computing Infrastructures. IEEE Communications Letters, 26(4), 848-852.
+```bibtex
+@article{souza2023edgesimpy,
+    author={Paulo S. Souza and Tiago Ferreto and Rodrigo N. Calheiros},
+    title={EdgeSimPy: Python-Based Modeling and Simulation of Edge Computing Resource Management Policies},
+    journal={Future Generation Computer Systems},
+    year={2023},
+    issn={0167-739X},
+    volume={TBD},
+    pages={TBD},
+    doi={https://doi.org/10.1016/j.future.2023.06.013},
+    publisher={Elsevier}
+}
+```
 
-* Souza, P., Vieira, Â. N. C., Rubin, F., Ferreto, T., & Rossi, F. D. (2022). Latency-aware Privacy-preserving Service Migration in Federated Edges. In Proceedings of the 12th International Conference on Cloud Computing and Services Science (pp. 288-295).
-
-* Souza, P., Kayser, C., Roges, L., & Ferreto, T. (2023). Thea — a QoS, Privacy, and Power-aware Algorithm for Placing Applications on Federated Edges. In Proceedings of the 31th Euromicro International Conference on Parallel, Distributed and Network-Based Processing (pp. 136-143).
-
-* Rubin, F., Souza, P., & Ferreto, T. (2023). Reducing Power Consumption during Server Maintenance on Edge Computing Infrastructures. In Proceedings of the 38th ACM/SIGAPP Symposium on Applied Computing (pp. 691-698).
-
-  
 
 # Collaborators
 
