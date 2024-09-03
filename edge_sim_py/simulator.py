@@ -305,6 +305,7 @@ class Simulator(ComponentManager, Model):
             if metrics != {}:
                 if f"{agent.__class__.__name__}" not in self.agent_metrics:
                     self.agent_metrics[f"{agent.__class__.__name__}"] = []
+                    self.create_file_to_log(agent)
 
                 metrics = {**{"Object": f"{agent}", "Time Step": self.schedule.steps}, **metrics}
                 self.agent_metrics[f"{agent.__class__.__name__}"].append(metrics)
@@ -313,6 +314,16 @@ class Simulator(ComponentManager, Model):
             self.dump_data_to_disk()
             self.last_dump = self.schedule.steps
 
+    def create_file_to_log(self, agent) ->None:
+        """Create file to save metrics"""
+
+        # Create logs directory if it does not exit 
+        if not os.path.exists(f"{self.logs_directory}/"):
+            os.makedirs(f"{self.logs_directory}")
+        
+        with open(f"{self.logs_directory}/{agent.__class__.__name__}.msgpack", "wb") as output_file:
+            output_file.write(msgpack.packb([]))
+    
     def dump_data_to_disk(self, clean_data_in_memory: bool = True) -> None:
         """Dumps simulation metrics to the disk.
 
@@ -320,15 +331,45 @@ class Simulator(ComponentManager, Model):
             clean_data_in_memory (bool, optional): Purges the list of metrics stored in the memory. Defaults to True.
         """
         if self.dump_interval != float("inf"):
-            if not os.path.exists(f"{self.logs_directory}/"):
-                os.makedirs(f"{self.logs_directory}")
-
+            
             for key, value in self.agent_metrics.items():
-                with open(f"{self.logs_directory}/{key}.msgpack", "wb") as output_file:
-                    output_file.write(msgpack.packb(value))
+
+                # The following code snippet presents two solutions for adding new elements to a 
+                # list stored in a msgpack file. 
+
+ 
+                # The first solution is more efficient in terms of write operations. It involves 
+                # reading the existing list, appending the new elements, and then rewriting the 
+                # entire list back to the file. This method can handle large files more gracefully 
+                # and ensures that the file remains consistent. However, it may require the use of 
+                # `Unpacker` to read the file if multiple objects are stored sequentially. 
+                
+                #  first
+                # with open(f"{self.logs_directory}/{key}.msgpack", "ab") as output_file:
+                # for v in value:
+                    #     output_file.write(msgpack.packb(v))
+
+
+
+                # The second solution is less efficient in terms of writing speed and may consume 
+                # more RAM. It involves reading the entire file into memory, appending the new 
+                # elements to the list, and then rewriting the entire file. This approach can be 
+                # slower and less memory-efficient, especially for very large files.
+
+                # second
+                with open(f"{self.logs_directory}/{key}.msgpack", "rb+") as output_file:
+                    
+                    data = [ d for d in msgpack.Unpacker(output_file)]
+
+                    data.extend(value)
+        
+                    output_file.seek(0)
+                    output_file.write(msgpack.packb(data))
+
+                    output_file.write(msgpack.packb(data))
 
                 if clean_data_in_memory:
-                    value = []
+                    self.agent_metrics[key] = []
 
     def initialize_agent(self, agent: object) -> object:
         """Initializes an agent object.
@@ -352,3 +393,4 @@ class Simulator(ComponentManager, Model):
         agent.model.schedule.add(agent)
 
         return agent
+
