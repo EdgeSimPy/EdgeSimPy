@@ -1,27 +1,25 @@
-""" Contains application-related functionality."""
-# EdgeSimPy components
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from edge_sim_py.components.user import User
+    from edge_sim_py.components.service import Service
+
 from edge_sim_py.component_manager import ComponentManager
 
-# Mesa modules
-from mesa import Agent
 
-
-class Application(ComponentManager, Agent):
-    """Class that represents an application."""
-
+class Application(ComponentManager):
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []
     _object_count = 0
 
-    def __init__(self, obj_id: int = None, label: str = "") -> object:
+    def __init__(self, obj_id: int = None, label: str = ""):
         """Creates an Application object.
 
         Args:
             obj_id (int, optional): Object identifier.
             label (str, optional): Application label.
-
-        Returns:
-            object: Created Application object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -30,16 +28,16 @@ class Application(ComponentManager, Agent):
         self.__class__._object_count += 1
         if obj_id is None:
             obj_id = self.__class__._object_count
-        self.id = obj_id
+        self.id: int = obj_id
 
         # Application label
         self.label = label
 
         # List of services that compose the application
-        self.services = []
+        self.services: list[Service] = []
 
         # List of users that access the application
-        self.users = []
+        self.users: list[User] = []
 
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None
@@ -57,8 +55,13 @@ class Application(ComponentManager, Agent):
                 "label": self.label,
             },
             "relationships": {
-                "services": [{"class": type(service).__name__, "id": service.id} for service in self.services],
-                "users": [{"class": type(user).__name__, "id": user.id} for user in self.users],
+                "services": [
+                    {"class": type(service).__name__, "id": service.id}
+                    for service in self.services
+                ],
+                "users": [
+                    {"class": type(user).__name__, "id": user.id} for user in self.users
+                ],
             },
         }
         return dictionary
