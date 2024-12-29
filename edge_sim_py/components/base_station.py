@@ -1,14 +1,8 @@
-""" Contains base-station-related functionality."""
-
-# EdgeSimPy components
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
-# Mesa modules
 
-
-class BaseStation(ComponentManager):
-    """Class that represents a base station."""
-
+class BaseStation(ComponentManager, Agent):
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0

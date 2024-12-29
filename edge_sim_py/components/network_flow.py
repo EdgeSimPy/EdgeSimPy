@@ -1,7 +1,8 @@
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
 
-class NetworkFlow(ComponentManager):
+class NetworkFlow(ComponentManager, Agent):
 
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager

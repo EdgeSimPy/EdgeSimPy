@@ -12,16 +12,20 @@ from edge_sim_py.component_manager import ComponentManager
 from edge_sim_py.components.base_station import BaseStation
 from edge_sim_py.components.network_switch import NetworkSwitch
 from edge_sim_py.components.topology import Topology
+from mesa import Agent
 
 
-class User(ComponentManager):
+class User(ComponentManager, Agent):
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager
     _instances = []
+    """List of all `User` instances created."""
+
     _object_count: int = 0
+    """Counter to assign unique IDs to each `User` instance."""
 
     def __init__(self, obj_id: int | None = None):
-        """Creates an User object.
+        """Initializes a new instance of the `User` class.
 
         Args:
             obj_id (int, optional): Object identifier. Defaults to None.
@@ -34,16 +38,17 @@ class User(ComponentManager):
         if obj_id is None:
             obj_id = self.__class__._object_count
         self.id = obj_id
+        """Unique identifier for the user."""
 
         # User coordinates
         self.coordinates_trace = []
         self.coordinates = None
 
-        # List of applications accessed by the user
         self.applications: list[Application] = []
+        """List of applications accessed by the user."""
 
-        # Reference to the base station the user is connected to
         self.base_station = None
+        """Reference to the base station the user is connected to."""
 
         # User access metadata
         self.making_requests = {}

@@ -1,5 +1,12 @@
 """ Contains edge-server-related functionality."""
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from edge_sim_py.components.service import Service
+
 import typing
 
 import networkx as nx
@@ -8,9 +15,10 @@ from edge_sim_py.components.container_image import ContainerImage
 from edge_sim_py.components.container_layer import ContainerLayer
 from edge_sim_py.components.container_registry import ContainerRegistry
 from edge_sim_py.components.network_flow import NetworkFlow
+from mesa import Agent
 
 
-class EdgeServer(ComponentManager):
+class EdgeServer(ComponentManager, Agent):
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []
@@ -45,54 +53,73 @@ class EdgeServer(ComponentManager):
         if obj_id is None:
             obj_id = self.__class__._object_count
         self.id = obj_id
+        """Unique identifier for the edge server."""
 
-        # Edge server model name
         self.model_name = model_name
+        """Model name of the edge server."""
 
-        # Edge server base station
         self.base_station = None
+        """Reference to the base station the edge server is connected to."""
 
-        # Edge server network switch
         self.network_switch = None
+        """Reference to the network switch associated with the edge server."""
 
-        # Edge server coordinates
         self.coordinates = coordinates
+        """Edge server coordinates"""
 
         # Edge server capacity
         self.cpu = cpu
+        """CPU capacity of the edge server."""
         self.memory = memory
+        """Memory capacity of the edge server."""
         self.disk = disk
+        """Disk storage capacity of the edge server."""
 
         # Edge server demand
         self.cpu_demand = 0
+        """Current CPU demand on the edge server."""
+
         self.memory_demand = 0
+        """Current memory demand on the edge server."""
+
         self.disk_demand = 0
+        """Current disk storage demand on the edge server."""
 
-        # Edge server's availability status
         self.available = True
+        """Indicates whether the edge server is available for hosting services."""
 
-        # Number of active migrations involving the edge server
         self.ongoing_migrations = 0
+        """Number of active migrations involving this edge server."""
 
         # Power Features
         self.active = True
+        """Indicates whether the edge server is active."""
+
         self.power_model = power_model
         self.power_model_parameters = {}
 
-        # Container registries and services hosted by the edge server
-        self.container_registries = []
-        self.services = []
+        self.container_registries: list[ContainerRegistry] = []
+        """List of container registries hosted by the edge server."""
 
-        # Container images and container layers hosted by the edge server
-        self.container_images = []
+        self.services: list[Service] = []
+        """List of services hosted on the edge server."""
+
+        self.container_images: list[ContainerImage] = []
+        """List of container images hosted by the edge server."""
+
         self.container_layers: list[ContainerLayer] = []
+        """List of container layers hosted by the edge server."""
 
         # Lists that control the layers being pulled to the edge server
-        self.waiting_queue = []
-        self.download_queue = []
+        self.waiting_queue: list = []
+        """Queue of container layers waiting to be downloaded."""
+
+        self.download_queue: list = []
+        """Queue of container layers currently being downloaded."""
 
         # Number of container layers the edge server can download simultaneously (default = 3)
         self.max_concurrent_layer_downloads = 3
+        """Maximum number of container layers the edge server can download simultaneously."""
 
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None

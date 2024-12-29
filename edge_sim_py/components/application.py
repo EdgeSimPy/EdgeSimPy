@@ -7,9 +7,10 @@ if TYPE_CHECKING:
     from edge_sim_py.components.service import Service
 
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
 
-class Application(ComponentManager):
+class Application(ComponentManager, Agent):
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []
     _object_count = 0
@@ -30,14 +31,14 @@ class Application(ComponentManager):
             obj_id = self.__class__._object_count
         self.id: int = obj_id
 
-        # Application label
         self.label = label
+        """Application label."""
 
-        # List of services that compose the application
         self.services: list[Service] = []
+        """List of services that compose the application."""
 
-        # List of users that access the application
         self.users: list[User] = []
+        """List of users that access the application."""
 
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None

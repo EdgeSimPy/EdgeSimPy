@@ -1,9 +1,10 @@
 import copy
 
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
 
-class NetworkSwitch(ComponentManager):
+class NetworkSwitch(ComponentManager, Agent):
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0

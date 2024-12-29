@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "edge_sim_py"
-version = "1.1.0"
+version = "1.2.0"
 description = "Python-based modeling and simulation framework for Edge Computing resource management policies"
-authors = ["Paulo Severo <paulo.severo@edu.pucrs.br>"]
+authors = ["Paulo Severo <paulo.severo@edu.pucrs.br>", "Ariel Menezes <arielalmeida@ufba.br>", "Tauane Sales <tauanesales@ufba.br>"]
 
 [tool.poetry.dependencies]
 python = "^3.12"

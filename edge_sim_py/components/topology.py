@@ -1,9 +1,10 @@
 import networkx as nx
 from edge_sim_py.component_manager import ComponentManager
 from edge_sim_py.components.network_flow import NetworkFlow
+from mesa import Agent
 
 
-class Topology(ComponentManager, nx.Graph):
+class Topology(ComponentManager, nx.Graph, Agent):
     """Class that represents a network topology."""
 
     # Class attributes that allow this class to use helper methods from ComponentManager

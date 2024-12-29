@@ -8,9 +8,10 @@ if TYPE_CHECKING:
     from edge_sim_py.components.container_layer import ContainerLayer
 
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
 
-class ContainerImage(ComponentManager):
+class ContainerImage(ComponentManager, Agent):
     """Class that represents a container image."""
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
