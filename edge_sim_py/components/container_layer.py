@@ -1,19 +1,18 @@
 """ Contains container-layer-related functionality."""
-# EdgeSimPy components
+
 from edge_sim_py.component_manager import ComponentManager
 
-# Mesa modules
-from mesa import Agent
 
-
-class ContainerLayer(ComponentManager, Agent):
+class ContainerLayer(ComponentManager):
     """Class that represents a container layer."""
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []
     _object_count = 0
 
-    def __init__(self, obj_id: int = None, digest: str = "", size: int = 0, instruction: str = "") -> object:
+    def __init__(
+        self, obj_id: int = None, digest: str = "", size: int = 0, instruction: str = ""
+    ):
         """Creates an User object.
 
         Args:
@@ -21,9 +20,6 @@ class ContainerLayer(ComponentManager, Agent):
             digest (str, optional): Layer digest. Defaults to "".
             size (int, optional): Layer size (in megabytes). Defaults to 0.
             instruction (str, optional): Layer instruction. Defaults to "".
-
-        Returns:
-            object: Created User object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -32,12 +28,12 @@ class ContainerLayer(ComponentManager, Agent):
         self.__class__._object_count += 1
         if obj_id is None:
             obj_id = self.__class__._object_count
-        self.id = obj_id
+        self.id: int = obj_id
 
         # Layer's metadata
-        self.digest = digest
-        self.size = size
-        self.instruction = instruction
+        self.digest: str = digest
+        self.size: int = size
+        self.instruction: str = instruction
 
         # Reference to the server that hosts the layer
         self.server = None
@@ -60,7 +56,11 @@ class ContainerLayer(ComponentManager, Agent):
                 "instruction": self.instruction,
             },
             "relationships": {
-                "server": {"class": type(self.server).__name__, "id": self.server.id} if self.server else None,
+                "server": (
+                    {"class": type(self.server).__name__, "id": self.server.id}
+                    if self.server
+                    else None
+                ),
             },
         }
         return dictionary

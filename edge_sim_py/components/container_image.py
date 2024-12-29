@@ -1,12 +1,16 @@
 """ Contains container-image-related functionality."""
-# EdgeSimPy components
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from edge_sim_py.components.container_layer import ContainerLayer
+
 from edge_sim_py.component_manager import ComponentManager
 
-# Mesa modules
-from mesa import Agent
 
-
-class ContainerImage(ComponentManager, Agent):
+class ContainerImage(ComponentManager):
     """Class that represents a container image."""
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
@@ -20,8 +24,8 @@ class ContainerImage(ComponentManager, Agent):
         digest: str = "",
         tag: str = "0.0.0",
         architecture: str = "",
-        layers: list = [],
-    ) -> object:
+        layers: list[ContainerLayer] = [],
+    ):
         """Creates a ContainerImage object.
 
         Args:
@@ -31,9 +35,6 @@ class ContainerImage(ComponentManager, Agent):
             tag (str, optional): Image tag (i.e., version code). Defaults to "0.0.0".
             architecture (str, optional): Image architecture (e.g., "amd64"). Defaults to "".
             layers (list, optional): Digests of layers that compose the image. Defaults to [].
-
-        Returns:
-            object: Created ContainerImage object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -51,7 +52,7 @@ class ContainerImage(ComponentManager, Agent):
         self.architecture = architecture
 
         # List with the digests of the container layers that compose the image
-        self.layers_digests = layers
+        self.layers_digests: list[ContainerLayer] = layers
 
         # Reference to the server that accommodates the image
         self.server = None
@@ -76,7 +77,11 @@ class ContainerImage(ComponentManager, Agent):
                 "architecture": self.architecture,
             },
             "relationships": {
-                "server": {"class": type(self.server).__name__, "id": self.server.id} if self.server else None,
+                "server": (
+                    {"class": type(self.server).__name__, "id": self.server.id}
+                    if self.server
+                    else None
+                ),
             },
         }
         return dictionary

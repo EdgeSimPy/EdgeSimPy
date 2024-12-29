@@ -1,26 +1,23 @@
 """ Contains base-station-related functionality."""
+
 # EdgeSimPy components
 from edge_sim_py.component_manager import ComponentManager
 
 # Mesa modules
-from mesa import Agent
 
 
-class BaseStation(ComponentManager, Agent):
+class BaseStation(ComponentManager):
     """Class that represents a base station."""
 
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0
 
-    def __init__(self, obj_id: int = None) -> object:
+    def __init__(self, obj_id: int = None):
         """Creates a BaseStation object.
 
         Args:
             obj_id (int, optional): Object identifier.
-
-        Returns:
-            object: Created BaseStation object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -59,13 +56,21 @@ class BaseStation(ComponentManager, Agent):
                 "wireless_delay": self.wireless_delay,
             },
             "relationships": {
-                "users": [{"class": type(user).__name__, "id": user.id} for user in self.users],
-                "edge_servers": [
-                    {"class": type(edge_server).__name__, "id": edge_server.id} for edge_server in self.edge_servers
+                "users": [
+                    {"class": type(user).__name__, "id": user.id} for user in self.users
                 ],
-                "network_switch": {"class": type(self.network_switch).__name__, "id": self.network_switch.id}
-                if self.network_switch
-                else None,
+                "edge_servers": [
+                    {"class": type(edge_server).__name__, "id": edge_server.id}
+                    for edge_server in self.edge_servers
+                ],
+                "network_switch": (
+                    {
+                        "class": type(self.network_switch).__name__,
+                        "id": self.network_switch.id,
+                    }
+                    if self.network_switch
+                    else None
+                ),
             },
         }
         return dictionary

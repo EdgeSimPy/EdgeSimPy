@@ -1,16 +1,9 @@
-""" Contains topology-related functionality."""
-# EdgeSimPy components
+import networkx as nx
 from edge_sim_py.component_manager import ComponentManager
 from edge_sim_py.components.network_flow import NetworkFlow
 
-# Mesa modules
-from mesa import Agent
 
-# Python libraries
-import networkx as nx
-
-
-class Topology(ComponentManager, nx.Graph, Agent):
+class Topology(ComponentManager, nx.Graph):
     """Class that represents a network topology."""
 
     # Class attributes that allow this class to use helper methods from ComponentManager
@@ -22,10 +15,8 @@ class Topology(ComponentManager, nx.Graph, Agent):
 
         Args:
             obj_id (int, optional): Object identifier.
-            existing_graph (nx.Graph, optional): NetworkX graph representing the network topology.
-
-        Returns:
-            object: Created Topology object.
+            existing_graph (nx.Graph, optional): NetworkX graph representing the network
+              topology.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -66,10 +57,13 @@ class Topology(ComponentManager, nx.Graph, Agent):
 
     def step(self):
         """Method that executes the events involving the object at each time step."""
-        self.model.network_flow_scheduling_algorithm(topology=self, flows=NetworkFlow.all())
+        self.model.network_flow_scheduling_algorithm(
+            topology=self, flows=NetworkFlow.all()
+        )
 
     def _remove_path_duplicates(self, path: list) -> list:
-        """Removes side-by-side duplicated nodes on network paths to avoid NetworkX crashes.
+        """Removes side-by-side duplicated nodes on network paths to avoid NetworkX
+        crashes.
 
         Args:
             path (list): Original network path.
@@ -80,7 +74,11 @@ class Topology(ComponentManager, nx.Graph, Agent):
         modified_path = []
 
         for i in range(len(path)):
-            if len(modified_path) == 0 or len(modified_path) >= 1 and modified_path[-1] != path[i]:
+            if (
+                len(modified_path) == 0
+                or len(modified_path) >= 1
+                and modified_path[-1] != path[i]
+            ):
                 modified_path.append(path[i])
 
         return modified_path
@@ -96,13 +94,15 @@ class Topology(ComponentManager, nx.Graph, Agent):
         """
         path_delay = 0
 
-        # Calculates the communication delay based on the delay property of each network link in the path
+        # Calculates the communication delay based on the delay property of each network
+        # link in the path
         path_delay = nx.classes.function.path_weight(G=self, path=path, weight="delay")
 
         return path_delay
 
     def _allocate_communication_path(self, communication_path: list, app: object):
-        """Adds the demand of a given application to a set of links that comprehend a communication path.
+        """Adds the demand of a given application to a set of links that comprehend a
+        communication path.
 
         Args:
             communication_path (list): Communication path.
@@ -120,7 +120,8 @@ class Topology(ComponentManager, nx.Graph, Agent):
                         link["applications"].append(app)
 
     def _release_communication_path(self, communication_path: list, app: object):
-        """Releases the demand of a given application from a set of links that comprehend a communication path.
+        """Releases the demand of a given application from a set of links that
+        comprehend a communication path.
 
         Args:
             communication_path (list): Communication path.

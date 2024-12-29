@@ -1,15 +1,10 @@
-""" Contains network-flow-related functionality."""
-# EdgeSimPy components
 from edge_sim_py.component_manager import ComponentManager
 
-# Mesa modules
-from mesa import Agent
 
+class NetworkFlow(ComponentManager):
 
-class NetworkFlow(ComponentManager, Agent):
-    """Class that represents a network flow."""
-
-    # Class attributes that allow this class to use helper methods from the ComponentManager
+    # Class attributes that allow this class to use helper methods from the
+    # ComponentManager
     _instances = []
     _object_count = 0
 
@@ -24,7 +19,7 @@ class NetworkFlow(ComponentManager, Agent):
         path: list = [],
         data_to_transfer: int = 0,
         metadata: dict = {},
-    ) -> object:
+    ):
         """Creates a NetworkFlow object.
 
         Args:
@@ -34,12 +29,11 @@ class NetworkFlow(ComponentManager, Agent):
             source (object, optional): Node where the flow starts. Defaults to None.
             target (object, optional): Node where the flow ends. Defaults to None.
             start (int, optional): Time step in which the flow started. Defaults to 0.
-            path (list, optional): Network path used to pass the flow over the list of network nodes. Defaults to [].
-            data_to_transfer (int, optional): Amount of data transferred by the self. Defaults to 0.
+            path (list, optional): Network path used to pass the flow over the list of
+              network nodes. Defaults to [].
+            data_to_transfer (int, optional): Amount of data transferred by the self.
+              Defaults to 0.
             metadata (dict, optional): Custom flow metadata. Defaults to {}.
-
-        Returns:
-            object: Created NetworkFlow object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -75,7 +69,8 @@ class NetworkFlow(ComponentManager, Agent):
         # Custom flow metadata
         self.metadata = metadata
 
-        # Adding a reference to the flow inside the network links that comprehend the "path" attribute
+        # Adding a reference to the flow inside the network links that comprehend the
+        # "path" attribute
         for i in range(0, len(path) - 1):
             link = self.topology[path[i]][path[i + 1]]
             link["active_flows"].append(self)
@@ -95,7 +90,9 @@ class NetworkFlow(ComponentManager, Agent):
         dictionary = {
             "id": self.id,
             "status": self.status,
-            "nodes": [{"type": type(node).__name__, "id": node.id} for node in self.nodes],
+            "nodes": [
+                {"type": type(node).__name__, "id": node.id} for node in self.nodes
+            ],
             "path": self.path,
             "start": self.start,
             "end": self.end,
@@ -112,10 +109,17 @@ class NetworkFlow(ComponentManager, Agent):
             metrics (dict): Object metrics.
         """
         bw = list(self.bandwidth.values())
-        actual_bw = min(bw) if len([bw for bw in self.bandwidth.values() if bw == None]) == 0 else None
+        actual_bw = (
+            min(bw)
+            if len([bw for bw in self.bandwidth.values() if bw is None]) == 0
+            else None
+        )
 
         if self.metadata["type"] == "layer":
-            object_being_transferred = f"{str(self.metadata['object'])} ({self.metadata['object'].instruction})"
+            object_being_transferred = (
+                f"{str(self.metadata['object'])}"
+                f" ({self.metadata['object'].instruction})"
+            )
         else:
             object_being_transferred = str(self.metadata["object"])
 
@@ -139,7 +143,7 @@ class NetworkFlow(ComponentManager, Agent):
         """Method that executes the events involving the object at each time step."""
         if self.status == "active":
             # Updating the flow progress according to the available bandwidth
-            if not any([bw == None for bw in self.bandwidth.values()]):
+            if not any([bw is None for bw in self.bandwidth.values()]):
                 self.data_to_transfer -= min(self.bandwidth.values())
 
             if self.data_to_transfer <= 0:
@@ -157,7 +161,8 @@ class NetworkFlow(ComponentManager, Agent):
                     link = self.model.topology[self.path[i]][self.path[i + 1]]
                     link["active_flows"].remove(self)
 
-                # When container layer flows finish: Adds the container layer to its target host
+                # When container layer flows finish: Adds the container layer to its
+                # target host
                 if self.metadata["type"] == "layer":
                     # Removing the flow from its target host's download queue
                     self.target.download_queue.remove(self)
@@ -170,4 +175,4 @@ class NetworkFlow(ComponentManager, Agent):
                 # When service state flows finish: change the service migration status
                 elif self.metadata["type"] == "service_state":
                     service = self.metadata["object"]
-                    service._Service__migrations[-1]["status"] = "finished"
+                    service._migrations[-1]["status"] = "finished"

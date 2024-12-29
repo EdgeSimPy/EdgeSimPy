@@ -1,29 +1,18 @@
-""" Contains network-switch-related functionality."""
-# EdgeSimPy components
-from edge_sim_py.component_manager import ComponentManager
-
-# Mesa modules
-from mesa import Agent
-
-# Python libraries
 import copy
 
+from edge_sim_py.component_manager import ComponentManager
 
-class NetworkSwitch(ComponentManager, Agent):
-    """Class that represents a network switch."""
 
+class NetworkSwitch(ComponentManager):
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0
 
-    def __init__(self, obj_id: int = None) -> object:
+    def __init__(self, obj_id: int = None):
         """Creates a NetworkSwitch object.
 
         Args:
             obj_id (int, optional): Object identifier.
-
-        Returns:
-            object: Created NetworkSwitch object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -71,12 +60,20 @@ class NetworkSwitch(ComponentManager, Agent):
             "relationships": {
                 "power_model": self.power_model.__name__ if self.power_model else None,
                 "edge_servers": [
-                    {"class": type(edge_server).__name__, "id": edge_server.id} for edge_server in self.edge_servers
+                    {"class": type(edge_server).__name__, "id": edge_server.id}
+                    for edge_server in self.edge_servers
                 ],
-                "links": [{"class": type(link).__name__, "id": link.id} for link in self.links],
-                "base_station": {"class": type(self.base_station).__name__, "id": self.base_station.id}
-                if self.base_station
-                else None,
+                "links": [
+                    {"class": type(link).__name__, "id": link.id} for link in self.links
+                ],
+                "base_station": (
+                    {
+                        "class": type(self.base_station).__name__,
+                        "id": self.base_station.id,
+                    }
+                    if self.base_station
+                    else None
+                ),
             },
         }
         return dictionary
@@ -103,5 +100,9 @@ class NetworkSwitch(ComponentManager, Agent):
         Returns:
             power_consumption (float): Network switch's power consumption.
         """
-        power_consumption = self.power_model.get_power_consumption(device=self) if self.power_model is not None else 0
+        power_consumption = (
+            self.power_model.get_power_consumption(device=self)
+            if self.power_model is not None
+            else 0
+        )
         return power_consumption

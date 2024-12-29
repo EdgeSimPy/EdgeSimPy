@@ -1,26 +1,16 @@
-""" Contains network-link-related functionality."""
-# EdgeSimPy components
 from edge_sim_py.component_manager import ComponentManager
 
-# Mesa modules
-from mesa import Agent
 
-
-class NetworkLink(dict, ComponentManager, Agent):
-    """Class that represents a network link."""
-
+class NetworkLink(dict, ComponentManager):
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0
 
-    def __init__(self, obj_id: int = None) -> object:
+    def __init__(self, obj_id: int = None):
         """Creates a NetworkLink object.
 
         Args:
             obj_id (int, optional): Object identifier.
-
-        Returns:
-            object: Created NetworkLink object.
         """
         # Adding the new object to the list of instances of its class
         self.__class__._instances.append(self)
@@ -69,7 +59,9 @@ class NetworkLink(dict, ComponentManager, Agent):
         if attribute_name in self:
             return self[attribute_name]
         else:
-            raise AttributeError(f"Object {self} has no such attribute '{attribute_name}'.")
+            raise AttributeError(
+                f"Object {self} has no such attribute '{attribute_name}'."
+            )
 
     def __setattr__(self, attribute_name: str, attribute_value: object):
         """Overrides the value of an object attribute.
@@ -89,7 +81,9 @@ class NetworkLink(dict, ComponentManager, Agent):
         if attribute_name in self:
             del self[attribute_name]
         else:
-            raise AttributeError(f"Object {self} has no such attribute '{attribute_name}'.")
+            raise AttributeError(
+                f"Object {self} has no such attribute '{attribute_name}'."
+            )
 
     def _to_dict(self) -> dict:
         """Method that overrides the way the object is formatted to JSON."
@@ -107,9 +101,17 @@ class NetworkLink(dict, ComponentManager, Agent):
             },
             "relationships": {
                 "topology": {"class": "Topology", "id": self.topology.id},
-                "active_flows": [{"class": type(flow).__name__, "id": flow.id} for flow in self.active_flows],
-                "applications": [{"class": type(app).__name__, "id": app.id} for app in self.applications],
-                "nodes": [{"class": type(node).__name__, "id": node.id} for node in self.nodes],
+                "active_flows": [
+                    {"class": type(flow).__name__, "id": flow.id}
+                    for flow in self.active_flows
+                ],
+                "applications": [
+                    {"class": type(app).__name__, "id": app.id}
+                    for app in self.applications
+                ],
+                "nodes": [
+                    {"class": type(node).__name__, "id": node.id} for node in self.nodes
+                ],
             },
         }
         return dictionary

@@ -5,15 +5,20 @@ Example:
     'User.count()' allows you to get the number of created instances from class User.
     'Service.find_by_id(3)' allows you to find the Service object that has id attribute = 3
 """
-# Python libraries
-import os
+
 import json
+import os
+from typing import Self
+
+from mesa import Agent
 
 
-class ComponentManager:
+class ComponentManager(Agent):
     """This class provides auxiliary methods that facilitate object manipulation."""
 
     __model = None
+
+    id: int
 
     def __str__(self) -> str:
         """Defines how the object is represented inside print statements.
@@ -33,14 +38,20 @@ class ComponentManager:
 
     @classmethod
     def export_scenario(
-        cls, ignore_list: list = ["Simulator", "Topology", "NetworkFlow"], save_to_file: bool = False, file_name: str = "dataset"
+        cls,
+        ignore_list: list = ["Simulator", "Topology", "NetworkFlow"],
+        save_to_file: bool = False,
+        file_name: str = "dataset",
     ) -> dict:
-        """Exports metadata about the simulation model to a Python dictionary. If the "save_to_file" attribute is set to True, the
-        external dataset file generated is saved inside the "datasets/" directory by default.
+        """Exports metadata about the simulation model to a Python dictionary. If the
+        "save_to_file" attribute is set to True, the external dataset file generated is
+        saved inside the "datasets/" directory by default.
 
         Args:
-            ignore_list (list, optional): List of entities that will not be included in the output dict. Defaults to ["Simulator", "Topology", "NetworkFlow"].
-            save_to_file (bool, optional): Attribute that tells the method if it needs to save the scenario to an external file. Defaults to False.
+            ignore_list (list, optional): List of entities that will not be included in
+              the output dict. Defaults to ["Simulator", "Topology", "NetworkFlow"].
+            save_to_file (bool, optional): Attribute that tells the method if it needs
+              to save the scenario to an external file. Defaults to False.
             file_name (str, optional): Output file name. Defaults to "dataset".
 
         Returns:
@@ -54,8 +65,12 @@ class ComponentManager:
 
         for component in ComponentManager.__subclasses__():
             if component.__name__ not in ignore_list:
-                scenario[component.__name__] = [instance._to_dict() for instance in component._instances]
-                with open(f"datasets/{file_name}.json", "w", encoding="UTF-8") as output_file:
+                scenario[component.__name__] = [
+                    instance._to_dict() for instance in component._instances
+                ]
+                with open(
+                    f"datasets/{file_name}.json", "w", encoding="UTF-8"
+                ) as output_file:
                     json.dump(scenario, output_file, indent=4)
 
         return scenario
@@ -77,7 +92,7 @@ class ComponentManager:
         return created_object
 
     @classmethod
-    def find_by(cls, attribute_name: str, attribute_value: object) -> object:
+    def find_by(cls, attribute_name: str, attribute_value: object) -> Self:
         """Finds objects from a given class based on an user-specified attribute.
 
         Args:
@@ -85,26 +100,33 @@ class ComponentManager:
             attribute_value (object): Attribute value.
 
         Returns:
-            object: Class object.
+            Self: Instance of the current class.
         """
-        class_object = next((obj for obj in cls._instances if getattr(obj, attribute_name) == attribute_value), None)
+        class_object = next(
+            (
+                obj
+                for obj in cls._instances
+                if getattr(obj, attribute_name) == attribute_value
+            ),
+            None,
+        )
         return class_object
 
     @classmethod
-    def find_by_id(cls, obj_id: int) -> object:
+    def find_by_id(cls, obj_id: int) -> Self:
         """Finds a class object based on its ID attribute.
 
         Args:
             obj_id (int): Object ID.
 
         Returns:
-            class_object (object): Class object found.
+            Self: Instance of the current class.
         """
         class_object = next((obj for obj in cls._instances if obj.id == obj_id), None)
         return class_object
 
     @classmethod
-    def all(cls) -> list:
+    def all(cls) -> list[Self]:
         """Returns the list of created objects of a given class.
 
         Returns:
@@ -113,11 +135,11 @@ class ComponentManager:
         return cls._instances
 
     @classmethod
-    def first(cls) -> object:
+    def first(cls) -> Self:
         """Returns the first object within the list of instances from a given class.
 
         Returns:
-            object: Class object.
+            Self: Instance of the current class.
         """
         if len(cls._instances) == 0:
             return None
@@ -125,11 +147,11 @@ class ComponentManager:
         return cls._instances[0]
 
     @classmethod
-    def last(cls) -> object:
+    def last(cls) -> Self:
         """Returns the last object within the list of instances from a given class.
 
         Returns:
-            object: Class object.
+            Self: Instance of the current class.
         """
         return cls._instances[-1]
 
@@ -150,6 +172,8 @@ class ComponentManager:
             obj (object): Object to be removed.
         """
         if obj not in cls._instances:
-            raise Exception(f"Object {obj} is not in the list of instances of the '{cls.__name__}' class.")
+            raise Exception(
+                f"Object {obj} is not in the list of instances of the '{cls.__name__}' class."
+            )
 
         cls._instances.remove(obj)
