@@ -18,6 +18,33 @@ from mesa import Agent
 
 
 class Service(ComponentManager, Agent):
+    """Represents a service within the edge simulation framework.
+
+    This class models a service that operates in the simulated edge computing environment.
+    Services are hosted on edge servers, interact with applications, and manage user
+    requests. The class includes functionalities for provisioning, migration, and
+    resource management.
+
+    Attributes:
+        id (int): Unique identifier of the service.
+        label (str): Label describing the service.
+        image_digest (str): Digest of the service's container image.
+        cpu_demand (int): CPU resources required by the service.
+        memory_demand (int): Memory resources required by the service.
+        state (int): State size of the service, where 0 indicates a stateless service.
+        server (EdgeServer | None): The edge server hosting this service.
+        application (Application | None): Application to which the service belongs.
+        users (list[User]): Users accessing this service.
+        _available (bool): Indicates whether the service is available for use.
+        being_provisioned (bool): Indicates if the service is currently in the process
+            of being provisioned. It is true during a placement/migration and becomes
+            false once the placement/migration is done.
+        _migrations (list): Metadata about all migrations experienced by the service.
+        required_privacy_level (PrivacyLevel): Privacy level required by the service.
+        model (object, optional): The simulation model the service is part of.
+        unique_id (int, optional): Unique identifier in the simulation model.
+    """
+
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager
     _instances = []
@@ -86,7 +113,9 @@ class Service(ComponentManager, Agent):
         """Indicates whether the service is available for use."""
 
         self.being_provisioned: bool = False
-        """Indicates whether the service is in the process of being provisioned."""
+        """Indicates whether the service is in the process of being provisioned.
+        It is true during a placement/migration and becomes false once the
+        placement/migration is done."""
 
         self._migrations: list = []
         """Metadata about each migration experienced by the service throughout the
@@ -301,7 +330,7 @@ class Service(ComponentManager, Agent):
                 for user in users:
                     user.set_communication_path(app)
 
-    def provision(self, target_server: object):
+    def provision(self, target_server: EdgeServer):
         """Starts the service's provisioning process. This process comprises both
         placement and migration. In the former, the service is not initially hosted by
         any server within the infrastructure. In the latter, the service is already

@@ -16,6 +16,30 @@ from mesa import Agent
 
 
 class User(ComponentManager, Agent):
+    """Represents a user in the edge simulation framework.
+
+    This class models a user interacting within a simulated edge computing environment.
+    Users can access applications, connect to base stations, and exhibit mobility patterns.
+    This class includes functionalities to manage user interactions with services, calculate
+    delays, and handle communication paths.
+
+    Attributes:
+        id (int): Unique identifier of the user.
+        coordinates (tuple, optional): Current geographical coordinates of the user.
+        coordinates_trace (list): Historical trace of the user's coordinates.
+        applications (list[Application]): Applications accessed by the user.
+        base_station (BaseStation, optional): Base station currently connected to the user.
+        making_requests (dict): Tracks the user's request activity for applications over time.
+        access_patterns (dict): Access patterns for the user's applications.
+        mobility_model (callable, optional): Function defining the user's mobility behavior.
+        mobility_model_parameters (dict): Parameters for the user's mobility model.
+        communication_paths (dict): Paths used for communication between the user and applications.
+        delays (dict): User-perceived delays for accessing applications.
+        delay_slas (dict): Service-level agreement (SLA) delay thresholds for applications.
+        model (object, optional): The simulation model the user is part of.
+        unique_id (int, optional): Unique identifier for the user in the simulation model.
+    """
+
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager
     _instances = []

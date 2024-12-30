@@ -3,6 +3,7 @@ from mesa import Agent
 
 
 class NetworkFlow(ComponentManager, Agent):
+    """Class that represents a network flow."""
 
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager

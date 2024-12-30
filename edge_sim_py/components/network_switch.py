@@ -5,6 +5,8 @@ from mesa import Agent
 
 
 class NetworkSwitch(ComponentManager, Agent):
+    """Class that represents a network switch."""
+
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0

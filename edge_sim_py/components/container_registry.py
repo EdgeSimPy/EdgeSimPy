@@ -16,6 +16,7 @@ from mesa import Agent
 
 
 class ContainerRegistry(ComponentManager, Agent):
+    """Class that represents a container registry."""
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []

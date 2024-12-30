@@ -19,6 +19,35 @@ from mesa import Agent
 
 
 class EdgeServer(ComponentManager, Agent):
+    """Represents an edge server in the edge simulation framework.
+
+    This class models an edge server that processes and manages computing resources
+    within the simulation environment. Edge servers connect to base stations, host
+    services, and support container-based operations. They include functionalities
+    for resource allocation, power management, and network flow handling.
+
+    Attributes:
+        id (int): Unique identifier of the edge server.
+        coordinates (tuple, optional): Geographical coordinates of the edge server.
+        model_name (str): The model name of the edge server.
+        cpu (int): CPU capacity of the edge server.
+        memory (int): Memory capacity of the edge server.
+        disk (int): Disk storage capacity of the edge server.
+        cpu_demand (int): Current CPU demand on the edge server.
+        memory_demand (int): Current memory demand on the edge server.
+        disk_demand (int): Current disk storage demand on the edge server.
+        available (bool): Indicates if the edge server is available for hosting services.
+        ongoing_migrations (int): Number of active migrations involving the edge server.
+        active (bool): Indicates whether the edge server is operational.
+        power_model (callable, optional): A function or object modeling power consumption.
+        container_registries (list[ContainerRegistry]): Container registries hosted by the server.
+        services (list[Service]): Services hosted on the edge server.
+        container_images (list[ContainerImage]): Container images stored on the server.
+        container_layers (list[ContainerLayer]): Container layers stored on the server.
+        waiting_queue (list): Queue of container layers waiting to be downloaded.
+        download_queue (list): Queue of container layers currently being downloaded.
+        max_concurrent_layer_downloads (int): Maximum simultaneous downloads of container layers.
+    """
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []
@@ -280,11 +309,11 @@ class EdgeServer(ComponentManager, Agent):
         )
         return power_consumption
 
-    def has_capacity_to_host(self, service: object) -> bool:
+    def has_capacity_to_host(self, service: Service) -> bool:
         """Checks if the edge server has enough free resources to host a given service.
 
         Args:
-            service (object): Service object that we are trying to host on the edge server.
+            service (Service): Service object that we are trying to host on the edge server.
 
         Returns:
             can_host (bool): Information of whether the edge server has capacity to host the service or not.
@@ -305,7 +334,7 @@ class EdgeServer(ComponentManager, Agent):
         )
         return can_host
 
-    def _add_container_image(self, template_container_image: object) -> object:
+    def _add_container_image(self, template_container_image: ContainerImage) -> object:
         """Adds a new container image to the edge server based on the specifications of an existing image.
         Args:
             template_container_image (object): Template container image.
@@ -348,12 +377,12 @@ class EdgeServer(ComponentManager, Agent):
 
         return image
 
-    def _get_uncached_layers(self, service: object) -> list:
+    def _get_uncached_layers(self, service: Service) -> list:
         """Gets the list of container layers from a given service that are not present
         in the edge server's layers cache list.
 
         Args:
-            service (object): Service whose disk demand delta will be calculated.
+            service (Service): Service whose disk demand delta will be calculated.
 
         Returns:
             uncached_layers (float): List of layers from service's image not present in
@@ -386,12 +415,12 @@ class EdgeServer(ComponentManager, Agent):
 
         return uncached_layers
 
-    def _get_disk_demand_delta(self, service: object) -> float:
+    def _get_disk_demand_delta(self, service: Service) -> float:
         """Calculates the additional disk demand necessary to host a registry inside the edge server considering
         the list of cached layers inside the edge server and the layers that compose the service's image.
 
         Args:
-            service (object): Service whose disk demand delta will be calculated.
+            service (Service): Service whose disk demand delta will be calculated.
 
         Returns:
             disk_demand_delta (float): Disk demand delta.

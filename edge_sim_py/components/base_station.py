@@ -1,8 +1,31 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from edge_sim_py.components.user import User
+    from edge_sim_py.components.edge_server import EdgeServer
+    from edge_sim_py.components.network_switch import NetworkSwitch
+
 from edge_sim_py.component_manager import ComponentManager
 from mesa import Agent
 
 
 class BaseStation(ComponentManager, Agent):
+    """Represents a base station in the edge simulation framework.
+
+
+    Attributes:
+        id (int): Unique identifier of the base station.
+        coordinates (tuple, optional): The geographical coordinates of the base station.
+        wireless_delay (float, optional): The wireless delay associated with the base station.
+        users (list[User]): List of users connected to the base station.
+        network_switch (NetworkSwitch, optional): The network switch connected to the base station.
+        edge_servers (list[EdgeServer]): List of edge servers connected to the base station.
+        model (optional): Reference to the simulation model (set during initialization).
+        unique_id (optional): Unique identifier used within the simulation framework.
+    """
+
     # Class attributes that allow this class to use helper methods from ComponentManager
     _instances = []
     _object_count = 0
@@ -20,7 +43,7 @@ class BaseStation(ComponentManager, Agent):
         self.__class__._object_count += 1
         if obj_id is None:
             obj_id = self.__class__._object_count
-        self.id = obj_id
+        self.id: int = obj_id
 
         # Base station coordinates
         self.coordinates = None
@@ -29,9 +52,9 @@ class BaseStation(ComponentManager, Agent):
         self.wireless_delay = None
 
         # Lists of users, network switch, and edge servers connected to the base station
-        self.users = []
-        self.network_switch = None
-        self.edge_servers = []
+        self.users: list[User] = []
+        self.network_switch: NetworkSwitch | None = None
+        self.edge_servers: list[EdgeServer] = []
 
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None
