@@ -10,10 +10,8 @@ import json
 import os
 from typing import Self
 
-from mesa import Agent
 
-
-class ComponentManager(Agent):
+class ComponentManager:
     """This class provides auxiliary methods that facilitate object manipulation."""
 
     __model = None

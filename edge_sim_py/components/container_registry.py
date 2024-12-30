@@ -12,9 +12,11 @@ from edge_sim_py.components.container_image import ContainerImage
 from edge_sim_py.components.container_layer import ContainerLayer
 from edge_sim_py.components.network_flow import NetworkFlow
 from edge_sim_py.components.service import Service
+from mesa import Agent
 
 
-class ContainerRegistry(ComponentManager):
+class ContainerRegistry(ComponentManager, Agent):
+    """Class that represents a container registry."""
 
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []

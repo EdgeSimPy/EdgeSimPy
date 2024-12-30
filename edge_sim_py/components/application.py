@@ -7,9 +7,25 @@ if TYPE_CHECKING:
     from edge_sim_py.components.service import Service
 
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
 
-class Application(ComponentManager):
+class Application(ComponentManager, Agent):
+    """Represents an application in the edge simulation framework.
+
+    This class models an application composed of multiple services that interact with users
+    and other components in the simulation. Each application is uniquely identified by an ID
+    and label and includes methods for managing relationships with services and collecting metrics.
+
+    Attributes:
+        id (int): Unique identifier of the application.
+        label (str): Label describing the application.
+        services (list[Service]): List of services that compose the application.
+        users (list[User]): List of users interacting with the application.
+        model (optional): Reference to the simulation model (set during initialization).
+        unique_id (optional): Unique identifier used within the simulation framework.
+    """
+
     # Class attributes that allow this class to use helper methods from the ComponentManager
     _instances = []
     _object_count = 0
@@ -30,14 +46,14 @@ class Application(ComponentManager):
             obj_id = self.__class__._object_count
         self.id: int = obj_id
 
-        # Application label
         self.label = label
+        """Application label."""
 
-        # List of services that compose the application
         self.services: list[Service] = []
+        """List of services that compose the application."""
 
-        # List of users that access the application
         self.users: list[User] = []
+        """List of users that access the application."""
 
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None
@@ -79,14 +95,14 @@ class Application(ComponentManager):
         """Method that executes the events involving the object at each time step."""
         ...
 
-    def connect_to_service(self, service: object) -> object:
+    def connect_to_service(self, service: Service) -> Application:
         """Creates a relationship between the application and a given Service object.
 
         Args:
             service (Service): Service object.
 
         Returns:
-            object: Updated Application object.
+            Application: Updated Application object.
         """
         self.services.append(service)
         service.application = self

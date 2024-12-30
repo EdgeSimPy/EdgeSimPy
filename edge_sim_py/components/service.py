@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from edge_sim_py.helpers.enums import PrivacyLevel
+
 if TYPE_CHECKING:
     from edge_sim_py.components.application import Application
     from edge_sim_py.components.edge_server import EdgeServer
@@ -12,13 +14,44 @@ from edge_sim_py.component_manager import ComponentManager
 from edge_sim_py.components.container_image import ContainerImage
 from edge_sim_py.components.container_layer import ContainerLayer
 from edge_sim_py.components.network_flow import NetworkFlow
+from mesa import Agent
 
 
-class Service(ComponentManager):
+class Service(ComponentManager, Agent):
+    """Represents a service within the edge simulation framework.
+
+    This class models a service that operates in the simulated edge computing environment.
+    Services are hosted on edge servers, interact with applications, and manage user
+    requests. The class includes functionalities for provisioning, migration, and
+    resource management.
+
+    Attributes:
+        id (int): Unique identifier of the service.
+        label (str): Label describing the service.
+        image_digest (str): Digest of the service's container image.
+        cpu_demand (int): CPU resources required by the service.
+        memory_demand (int): Memory resources required by the service.
+        state (int): State size of the service, where 0 indicates a stateless service.
+        server (EdgeServer | None): The edge server hosting this service.
+        application (Application | None): Application to which the service belongs.
+        users (list[User]): Users accessing this service.
+        _available (bool): Indicates whether the service is available for use.
+        being_provisioned (bool): Indicates if the service is currently in the process
+            of being provisioned. It is true during a placement/migration and becomes
+            false once the placement/migration is done.
+        _migrations (list): Metadata about all migrations experienced by the service.
+        required_privacy_level (PrivacyLevel): Privacy level required by the service.
+        model (object, optional): The simulation model the service is part of.
+        unique_id (int, optional): Unique identifier in the simulation model.
+    """
+
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager
     _instances = []
+    """List of all `Service` instances created."""
+
     _object_count = 0
+    """Counter to assign unique IDs to each `Service` instance."""
 
     def __init__(
         self,
@@ -28,6 +61,7 @@ class Service(ComponentManager):
         cpu_demand: int = 0,
         memory_demand: int = 0,
         state: int = 0,
+        required_privacy_level: PrivacyLevel = PrivacyLevel.NONE,
     ):
         """Creates a Service object.
 
@@ -48,41 +82,51 @@ class Service(ComponentManager):
         if obj_id is None:
             obj_id = self.__class__._object_count
         self.id: int = obj_id
+        """Unique identifier for the service."""
 
-        # Service label
-        self.label = label
+        self.label: str = label
+        """Label associated with the service."""
 
-        # Service image's digest
-        self.image_digest = image_digest
+        self.image_digest: str = image_digest
+        """Digest representing the service's container image."""
 
-        # Service demand
-        self.cpu_demand = cpu_demand
-        self.memory_demand = memory_demand
+        self.cpu_demand: int = cpu_demand
+        """CPU resources required by the service."""
 
-        # Service state
-        self.state = state
+        self.memory_demand: int = memory_demand
+        """Memory resources required by the service."""
 
-        # Server that hosts the service
+        self.state: int = state
+
         self.server: EdgeServer | None = None
+        """The edge server hosting this service."""
 
-        # Application to whom the service belongs
         self.application: Application | None = None
+        """The application to which this service belongs."""
 
-        # List of users that access the service
         self.users: list[User] = []
+        """List of users that access this service."""
 
         # Service availability and provisioning status
         # Service is not available, for example, when its state is being transferred
         self._available: bool = False
-        self.being_provisioned: bool = False
+        """Indicates whether the service is available for use."""
 
-        # List that stores metadata about each migration experienced by the service
-        # throughout the simulation
+        self.being_provisioned: bool = False
+        """Indicates whether the service is in the process of being provisioned.
+        It is true during a placement/migration and becomes false once the
+        placement/migration is done."""
+
         self._migrations: list = []
+        """Metadata about each migration experienced by the service throughout the
+        simulation"""
 
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None
         self.unique_id = None
+
+        self.required_privacy_level: PrivacyLevel = required_privacy_level
+        """The privacy level required by the service."""
 
     def _to_dict(self) -> dict:
         """Method that overrides the way the object is formatted to JSON."
@@ -286,7 +330,7 @@ class Service(ComponentManager):
                 for user in users:
                     user.set_communication_path(app)
 
-    def provision(self, target_server: object):
+    def provision(self, target_server: EdgeServer):
         """Starts the service's provisioning process. This process comprises both
         placement and migration. In the former, the service is not initially hosted by
         any server within the infrastructure. In the latter, the service is already

@@ -1,9 +1,10 @@
 """ Contains container-layer-related functionality."""
 
 from edge_sim_py.component_manager import ComponentManager
+from mesa import Agent
 
 
-class ContainerLayer(ComponentManager):
+class ContainerLayer(ComponentManager, Agent):
     """Class that represents a container layer."""
 
     # Class attributes that allow this class to use helper methods from the ComponentManager

@@ -12,16 +12,44 @@ from edge_sim_py.component_manager import ComponentManager
 from edge_sim_py.components.base_station import BaseStation
 from edge_sim_py.components.network_switch import NetworkSwitch
 from edge_sim_py.components.topology import Topology
+from mesa import Agent
 
 
-class User(ComponentManager):
+class User(ComponentManager, Agent):
+    """Represents a user in the edge simulation framework.
+
+    This class models a user interacting within a simulated edge computing environment.
+    Users can access applications, connect to base stations, and exhibit mobility patterns.
+    This class includes functionalities to manage user interactions with services, calculate
+    delays, and handle communication paths.
+
+    Attributes:
+        id (int): Unique identifier of the user.
+        coordinates (tuple, optional): Current geographical coordinates of the user.
+        coordinates_trace (list): Historical trace of the user's coordinates.
+        applications (list[Application]): Applications accessed by the user.
+        base_station (BaseStation, optional): Base station currently connected to the user.
+        making_requests (dict): Tracks the user's request activity for applications over time.
+        access_patterns (dict): Access patterns for the user's applications.
+        mobility_model (callable, optional): Function defining the user's mobility behavior.
+        mobility_model_parameters (dict): Parameters for the user's mobility model.
+        communication_paths (dict): Paths used for communication between the user and applications.
+        delays (dict): User-perceived delays for accessing applications.
+        delay_slas (dict): Service-level agreement (SLA) delay thresholds for applications.
+        model (object, optional): The simulation model the user is part of.
+        unique_id (int, optional): Unique identifier for the user in the simulation model.
+    """
+
     # Class attributes that allow this class to use helper methods from the
     # ComponentManager
     _instances = []
+    """List of all `User` instances created."""
+
     _object_count: int = 0
+    """Counter to assign unique IDs to each `User` instance."""
 
     def __init__(self, obj_id: int | None = None):
-        """Creates an User object.
+        """Initializes a new instance of the `User` class.
 
         Args:
             obj_id (int, optional): Object identifier. Defaults to None.
@@ -34,16 +62,17 @@ class User(ComponentManager):
         if obj_id is None:
             obj_id = self.__class__._object_count
         self.id = obj_id
+        """Unique identifier for the user."""
 
         # User coordinates
         self.coordinates_trace = []
         self.coordinates = None
 
-        # List of applications accessed by the user
         self.applications: list[Application] = []
+        """List of applications accessed by the user."""
 
-        # Reference to the base station the user is connected to
         self.base_station = None
+        """Reference to the base station the user is connected to."""
 
         # User access metadata
         self.making_requests = {}
