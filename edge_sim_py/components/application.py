@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from edge_sim_py.helpers.enums import PrivacyLevel
+
 if TYPE_CHECKING:
     from edge_sim_py.components.user import User
     from edge_sim_py.components.service import Service
@@ -30,7 +32,12 @@ class Application(ComponentManager, Agent):
     _instances = []
     _object_count = 0
 
-    def __init__(self, obj_id: int = None, label: str = ""):
+    def __init__(
+        self,
+        obj_id: int = None,
+        label: str = "",
+        required_privacy_level: PrivacyLevel = PrivacyLevel.NONE,
+    ):
         """Creates an Application object.
 
         Args:
@@ -58,6 +65,9 @@ class Application(ComponentManager, Agent):
         # Model-specific attributes (defined inside the model's "initialize()" method)
         self.model = None
         self.unique_id = None
+
+        self.required_privacy_level: PrivacyLevel = required_privacy_level
+        """The privacy level required by the service."""
 
     def _to_dict(self) -> dict:
         """Method that overrides the way the object is formatted to JSON."
