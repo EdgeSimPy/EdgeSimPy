@@ -1,4 +1,5 @@
 """ Contains network-link-related functionality."""
+
 # EdgeSimPy components
 from edge_sim_py.component_manager import ComponentManager
 
@@ -125,4 +126,5 @@ class NetworkLink(dict, ComponentManager, Agent):
 
     def step(self):
         """Method that executes the events involving the object at each time step."""
-        ...
+        # Updating the link's bandwidth demand based on the slice of bandwidth used by the active flows that cross it in the current step
+        self["bandwidth_demand"] = sum(flow.bandwidth[self.id] for flow in self["active_flows"])
