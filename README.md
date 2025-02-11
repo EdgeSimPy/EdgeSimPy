@@ -75,7 +75,7 @@ You can find more details on EdgeSimPy's functional abstractions below:
 Installing EdgeSimPy is a breeze! Make sure you have Python 3.7.1 or newer. Then, run the following command:
 
 ```bash
-pip install -q git+https://github.com/EdgeSimPy/EdgeSimPy.git@v1.1.0
+pip install -q git+https://github.com/EdgeSimPy/EdgeSimPy.git
 ```
 
 Want a different EdgeSimPy version? Simply replace the content after the "@" with your desired version (you can check out all EdgeSimPy released versions [here](https://github.com/EdgeSimPy/EdgeSimPy/releases)).
