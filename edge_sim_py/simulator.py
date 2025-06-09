@@ -324,11 +324,11 @@ class Simulator(ComponentManager, Model):
                 os.makedirs(f"{self.logs_directory}")
 
             for key, value in self.agent_metrics.items():
-                with open(f"{self.logs_directory}/{key}.msgpack", "wb") as output_file:
+                with open(f"{self.logs_directory}/{key}.msgpack", "ab") as output_file:
                     output_file.write(msgpack.packb(value))
 
                 if clean_data_in_memory:
-                    value = []
+                    self.agent_metrics[key] = []
 
     def initialize_agent(self, agent: object) -> object:
         """Initializes an agent object.
