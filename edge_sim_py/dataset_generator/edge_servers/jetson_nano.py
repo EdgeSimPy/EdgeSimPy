@@ -25,7 +25,7 @@ def jetson_nano() -> object:
     # Power-related attributes
     edge_server.power_model_parameters = {
         "max_power_consumption": 10,
-        "static_power_percentage": 5,
+        "static_power_percentage": 5 / 10,
     }
 
     return edge_server

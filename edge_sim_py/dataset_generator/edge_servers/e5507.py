@@ -27,7 +27,7 @@ def e5507() -> object:
     # Power-related attributes
     edge_server.power_model_parameters = {
         "max_power_consumption": 218,
-        "static_power_percentage": 67,
+        "static_power_percentage": 67 / 218,
     }
 
     return edge_server

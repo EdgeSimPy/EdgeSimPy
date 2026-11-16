@@ -27,7 +27,7 @@ def raspberry_pi4() -> object:
     # Power-related attributes
     edge_server.power_model_parameters = {
         "max_power_consumption": 7.3,
-        "static_power_percentage": 2.56,
+        "static_power_percentage": 2.56 / 7.3,
     }
 
     return edge_server
