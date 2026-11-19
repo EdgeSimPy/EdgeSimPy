@@ -23,7 +23,7 @@ class SquareServerPowerModel:
             static_power = (
                 device.power_model_parameters["static_power_percentage"] * device.power_model_parameters["max_power_consumption"]
             )
-            constant = (device.power_model_parameters["max_power_consumption"] - static_power) / 100
+            constant = (device.power_model_parameters["max_power_consumption"] - static_power) / 100**2
 
             demand = device.cpu_demand
             capacity = device.cpu
