@@ -27,7 +27,7 @@ def e5645() -> object:
     # Power-related attributes
     edge_server.power_model_parameters = {
         "max_power_consumption": 200,
-        "static_power_percentage": 63.1,
+        "static_power_percentage": 63.1 / 200,
     }
 
     return edge_server

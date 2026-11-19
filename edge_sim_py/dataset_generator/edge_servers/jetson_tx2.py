@@ -25,7 +25,7 @@ def jetson_tx2() -> object:
     # Power-related attributes
     edge_server.power_model_parameters = {
         "max_power_consumption": 15,
-        "static_power_percentage": 7.5,
+        "static_power_percentage": 7.5 / 15,
     }
 
     return edge_server
