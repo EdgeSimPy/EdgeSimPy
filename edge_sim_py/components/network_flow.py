@@ -86,6 +86,52 @@ class NetworkFlow(ComponentManager, Agent):
         self.model = None
         self.unique_id = None
 
+    @staticmethod
+    def calculate_model_transfer_size(num_parameters: int, nbits: int = 32, block_size: int = 64) -> int:
+        """Calculates wire transfer size in bytes for model parameters or gradients.
+
+        Args:
+            num_parameters (int): Total number of model parameters or gradients.
+            nbits (int): Bit precision (32 for FP32, 16 for FP16, 8 for INT8, 4 for INT4).
+            block_size (int): Block size for per-block quantization scaling.
+
+        Returns:
+            int: Payload size in bytes.
+        """
+        if nbits == 32:
+            return num_parameters * 4
+        elif nbits == 16:
+            return num_parameters * 2
+        elif nbits == 8:
+            num_blocks = (num_parameters + block_size - 1) // block_size
+            return num_parameters + (num_blocks * 4)
+        elif nbits == 4:
+            num_blocks = (num_parameters + block_size - 1) // block_size
+            packed_bytes = (num_parameters + 1) // 2
+            return packed_bytes + (num_blocks * 4)
+        else:
+            raise ValueError(f"Unsupported bit precision: {nbits}. Choose from 4, 8, 16, or 32.")
+
+    def apply_model_quantization(self, num_parameters: int, nbits: int = 4, block_size: int = 64) -> int:
+        """Configures data_to_transfer based on model parameter count and bit precision, updating metadata.
+
+        Args:
+            num_parameters (int): Number of model parameters or gradients.
+            nbits (int): Quantization precision (4, 8, 16, or 32). Defaults to 4.
+            block_size (int): Block scaling size. Defaults to 64.
+
+        Returns:
+            int: Calculated data_to_transfer size in bytes.
+        """
+        original_size = num_parameters * 4
+        quantized_size = self.calculate_model_transfer_size(num_parameters, nbits=nbits, block_size=block_size)
+        self.data_to_transfer = quantized_size
+        self.metadata["type"] = "model_update"
+        self.metadata["num_parameters"] = num_parameters
+        self.metadata["nbits"] = nbits
+        self.metadata["compression_ratio"] = round(original_size / max(1, quantized_size), 2)
+        return quantized_size
+
     def _to_dict(self) -> dict:
         """Method that overrides the way the object is formatted to JSON."
 
